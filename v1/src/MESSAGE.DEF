@@ -1,0 +1,71 @@
+Const MessageStr : Array[1..14] Of String
+                 = ('Menu file not found or destroyed !',
+                    'No commands to execute are specified !',
+                    'Group is empty. You cannot change/delete Items!',
+                    'Group is full. You cannot insert more Items !',
+                    'Specified path does not exist !',
+                    'Not enough memory to edit menu !',
+                    'Item refers to a group that is NOT empty !',
+                    'Rearrange WHAT ?????',
+                    'Group contains only one item !',
+                    'Batch file could not be modified !',
+                    'Menu file could NOT be written to disk !',
+                    'Disk is full ! Menu file was NOT saved to disk !',
+                    'UNDO unsuccessfull ! Backup file not found !',
+                    'Backup file for UNDO could not be saved !'
+                   );
+
+      InfoStr    : Array[1..14] Of String
+                 = ('Reading menu file ...',
+                    'Press any key ...',
+                    'Use '#24#25' to choose. Enter-Select',
+                    'Choose Item to CHANGE ...',
+                    'Choose Item to DELETE ...',
+                    'Use '#27#24#25#26' to move. F10-Save, Esc-Cancel',
+                    'Press Y or N ...',
+                    'Choose position where to INSERT ...',
+                    'Use '#24#25' to choose. Enter-Run, F2-Edit, Esc-DOS',
+                    'Writing menu file ...',
+                    'Choose item to move ...',
+                    'Choose new position for highlighted item ...',
+                    'Group empty. Use F2-Edit or Esc-DOS',
+                    'Enter drive letter ...'
+                   );
+
+      EditChoice : Array[1..14] Of String
+                 = ('----------------',
+                    'Change Menu Item',
+                    'Insert Menu Item',
+                    'Delete Menu Item',
+                    '----------------',
+                    'Change Passwords',
+                    'Rearrange Group ',
+                    'Save Menu file  ',
+                    '----------------',
+                    'Undo last change',
+                    'Reset Menu      ',
+                    '----------------',
+                    'Quit Edit Mode  ',
+                    '----------------');
+
+      _Yes          : Char = 'Y';
+      _No           : Char = 'N';
+      SureDeleteMsg       = 'Do you really want to delete this item ? (Y/N)';
+      New_Items_Pos       = '      - - NEW MENU ITEM''S POSITION - -';
+      EditPWMsg           = 'Please enter Edit password ...';
+      DOSPWMsg            = 'Please enter DOS password ...';
+      LogONPWMsg          = 'Please enter Log on password ...';
+      ItemPWMsg           = 'Please enter Password ...';
+      ModulePWMsg         = 'Please enter Module password ...';
+      Access_denied       = '- - A C C E S S   D E N I E D - -';
+      Memory_free         = 'Memory free';
+      Do_you_want_to      = 'Do you want to ...';
+      Choice1             = ' Try again'#13#10' Create new menu'#13#10' Quit Power-Choice';
+      Group_or_Command    = ' Make Command Item'#13#10' Make Group Item';
+      Group_is_empty      = 'Group is empty !';
+      SureHL              = 'Sure ??';
+      SureMsg             = 'Save your changes ? (Y/N)';
+      Press_ESC_to_return = 'Press ESC to return to Power-Choice';
+      Type_PCH_to_return  = 'Type PCH to return to Power-Choice ...';
+      Retry_Abort         = '(R)etry or (A)bort ?';
+      Press_any_key       = 'Press any key ...';

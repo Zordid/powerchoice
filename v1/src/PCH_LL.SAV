@@ -1,0 +1,210 @@
+;
+
+KEEP     MACRO ADDR
+         MOV DX,OFFSET ADDR
+         INT 27H
+         ENDM
+
+DOS      MACRO FUNC
+         MOV AH,FUNC
+         INT 21H
+         ENDM
+
+LINK     MACRO INT,OLDINTLOC,NEWINTLOC
+         MOV AL,INT
+         DOS 35H
+         MOV WORD PTR OLDINTLOC,BX
+         MOV WORD PTR OLDINTLOC+2,ES
+         MOV DX,OFFSET NEWINTLOC
+         MOV AL,INT
+         DOS 25H
+         ENDM
+
+;
+
+CODE     SEGMENT BYTE
+         ASSUME CS:CODE,DS:CODE
+         ORG 0100H
+
+BEG:     JMP INSTALL
+
+OLD1C    DD ?
+OLD60    DD ?
+OLD09    DD ?
+
+CHR1     DB ?
+ATT1     DB 07H
+CHR2     DB ?
+ATT2     DB 07H
+CHR3     DB ':'
+ATT3     DB 07H
+CHR4     DB ?
+ATT4     DB 07H
+CHR5     DB ?
+ATT5     DB 07H
+CHR6     DB ':'
+ATT6     DB 07H
+CHR7     DB ?
+ATT7     DB 07H
+CHR8     DB ?
+ATT8     DB 07H
+DROP     DB 00H
+TICK     DB 01H
+
+                                  ; Record
+NEW60:   JMP CS:[OLD60]           ;   JMP   : String[4];
+ID       DB 6,"      "            ;   ID    : String[6];
+VIDEO    DB 0                     ;   Video : Byte;
+PATH     DB 0                     ;   Path  : String[20];
+         DB 20 DUP(0)
+PRG      DB 1                     ;   Item  : Byte;
+GRP      DB 1                     ;   Group : Byte;
+PASSWORD DB 0                     ;   PWok  : Byte;
+STATUS   DB 0                     ;   Status: Byte;
+CLOCK    DB 0FFH                  ;   Clock : Byte;
+WAIT_    DB 0                     ;   Wait  : Byte;
+                                  ; End;
+
+VDAT     PROC NEAR
+         MOV AL,ES:[0449H]
+         CMP AL,07H
+         JNZ FRB
+         MOV AX,0B000H
+         JMP BRT
+FRB:     CMP AL,03H
+         JA GRF
+         CMP AL,01H
+         MOV AX,0B800H
+         JZ SML
+BRT:     MOV DI,0090H
+         JMP ZUW
+SML:     MOV DI,0040H
+ZUW:     MOV CX,0008H
+         CLC
+         RET
+GRF:     STC
+         RET
+VDAT     ENDP
+
+NEW1C:   STI
+         PUSH AX
+         PUSH ES
+         PUSH DS
+         MOV AX,CS
+         MOV DS,AX
+         XOR AX,AX
+         MOV ES,AX
+         MOV AL,ES:[0417H]
+         AND AL,0DH
+         CMP AL,0DH
+         JZ GED
+         MOV BYTE PTR DROP,00H
+         JMP CH1
+GED:     CMP BYTE PTR DROP,00H
+         JNZ CH1
+         NOT BYTE PTR DROP
+         CMP BYTE PTR CLOCK,00H
+         JNZ LCH
+         MOV BYTE PTR TICK,01H
+         JMP NT1
+LCH:     PUSH CX
+         PUSH DI
+         CALL VDAT
+         JC NT2
+         PUSH ES
+         MOV ES,AX
+         MOV AX,0720H
+         CLD
+         REPZ STOSW
+         POP ES
+NT2:     POP DI
+         POP CX
+NT1:     NOT BYTE PTR CLOCK
+CH1:     CMP BYTE PTR CLOCK,00H
+         JNZ CH2
+         JMP EX1
+CH2:     DEC BYTE PTR TICK
+         JZ CH3
+         JMP EX1
+CH3:     PUSH CX
+         PUSH DI
+         CALL VDAT
+         JNC SET
+         JMP EX2
+SET:     PUSH BX
+         PUSH DX
+         PUSH SI
+         PUSH AX
+         MOV BYTE PTR TICK,02H
+         MOV AX,ES:[046CH]
+         MOV DX,ES:[046EH]
+         MOV BX,0FFF0H
+         DIV BX
+         AAM
+         ADD AX,3030H
+         MOV CHR1,AH
+         MOV CHR2,AL
+         MOV AX,DX
+         XOR DX,DX
+         MOV BX,0444H
+         DIV BX
+         AAM
+         ADD AX,3030H
+         MOV CHR4,AH
+         MOV CHR5,AL
+         MOV AX,DX
+         MOV BX,000AH
+         MUL BX
+         MOV BL,0B6H
+         DIV BL
+         AAM
+         ADD AX,3030H
+         MOV CHR7,AH
+         MOV CHR8,AL
+         LEA SI,CHR1
+         POP ES
+         CLD
+         REPZ MOVSW
+         POP SI
+         POP DX
+         POP BX
+EX2:     POP DI
+         POP CX
+EX1:     POP DS
+         POP ES
+         POP AX
+         JMP CS:[OLD1C]
+
+
+END_TSR  EQU $
+
+INTRO    DB "Power-Choice Version 1.0e",13,10
+         DB "(C) 1990 Softwhere Associates",13,10,"$"
+OK       DB "Low-level driver installed.",13,10,"$"
+ERROR    DB "Already installed.",7,13,10,"$"
+
+INSTALL: MOV DX,OFFSET INTRO
+         DOS 9H
+         MOV AL,60H
+         DOS 35H
+         MOV CL,ES:[ID]
+         XOR CH,CH
+         MOV BH,CH
+L1:      MOV DI,CX
+         MOV BL,BYTE PTR ES:[ID+DI]
+         CMP BL,BYTE PTR CS:[ID+DI]
+         JNE GO
+         LOOP L1
+
+         MOV DX,OFFSET ERROR
+         DOS 9H
+         RET
+
+GO:      LINK 60H,OLD60,NEW60
+         LINK 1CH,OLD1C,NEW1C
+         MOV DX,OFFSET OK
+         DOS 9H
+         KEEP END_TSR
+
+CODE     ENDS
+         END BEG

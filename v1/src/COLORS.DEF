@@ -1,0 +1,71 @@
+  Type  ColorSet = Array[1..9] Of DTColor;
+  Const Color = 0; Mono = 1;
+
+        GroupClr = 1;
+        EditClr  = 2;
+        PWClr    = 3;
+        ADClr    = 4;
+        ErrorClr = 5;
+        BGClr    = 6;
+        MsgClr   = 7;
+        WaitClr  = 8;
+        HelpClr  = 9;
+
+        _Color : ColorSet
+                 { Window        Border           HeadLine }
+                  { 1 : Group window }
+               = (((Black,Red),(LightGray,Red),(Black,LightGray)),
+
+                  { 2 : Edit window }
+                  ((LightGray,Red),(White,Blue),(Red,LightGray)),
+
+                  { 3 : Password window }
+                  ((White,Blue),(Yellow,Green),(Yellow,Green)),
+
+                  { 4 : Acces denied window }
+                  ((Red,LightGray),(Red,LightGray),(0,0)),
+
+                  { 5 : I/O-Error window }
+                  ((Red,Black),(Black,Brown),(Black,Brown)),
+
+                  { 6 : Background colors }
+                  ((White,Blue),(0,0),(Red,LightGray)),
+
+                  { 7 : Message window }
+                  ((Black,LightGray),(Black,LightGray),(LightGray,Black)),
+
+                  { 8 : Wait window }
+                  ((White,Blue),(White,Blue),(0,0)),
+
+                  { 9 : Help window }
+                  ((White,Blue),(LightGray,Blue),(Red,LightGray)));
+
+        _Mono  : ColorSet
+                  { 1 : Group window }
+               = (((White,Black),(LightGray,Black),(Black,LightGray)),
+
+                  { 2 : Edit window }
+                  ((White,Black),(Black,LightGray),(Black,LightGray)),
+
+                  { 3 : Password window }
+                  ((Black,LightGray),(Black,LightGray),(Black,LightGray)),
+
+                  { 4 : Access denied window }
+                  ((Black,LightGray),(White,Black),(0,0)),
+
+                  { 5 : I/O-Error window }
+                  ((Black,LightGray),(Black,LightGray),(White,Black)),
+
+                  { 6 : Background colors }
+                  ((LightGray,Black),(0,0),(Black,LightGray)),
+
+                  { 7 : Message window }
+                  ((Black,LightGray),(Black,LightGray),(LightGray,Black)),
+
+                  { 8 : Wait window }
+                  ((White,Black),(Black,LightGray),(0,0)),
+
+                  { 9 : Help window }
+                  ((LightGray,Black),(Black,LightGray),(LightGray,Black)));
+
+  Var WinClr : ColorSet;
