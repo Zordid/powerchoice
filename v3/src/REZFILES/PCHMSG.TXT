@@ -1,0 +1,64 @@
+; PCHOICE
+sDirNotFound       Verzeichnis %s existiert nicht.
+sHelpFileNotFound  Hilfedatei nicht gefunden.
+sOutOfMemory       Nicht genügend Speicher zur Verfügung.
+
+; PCHFUNC
+sEditmodeOn        Editmodus ist aktiviert.
+sEditmodeOff       Editmodus ist deaktiviert.
+sEditmodeOffAsk    Änderungen in der Menüdatei sichern?
+sExitText          Power-Choice 3.0 beendet.\10\10\13
+sWrongDesktopFile  Falsches Desktop-Dateiformat!
+sDesktopWriteError Schreibfehler: Desktop kann nicht gesichert werden!
+sDesktopReadError  Lesefehler: Desktop kann nicht gelesen werden!
+
+; PCHMENU
+sDuplicateHotKey   Diese Kurzwahltaste ist schon belegt!
+sDeletePrompt      Menüpunkt %s wirklich löschen?
+sEnterPassword     Passwort für %s eingeben!
+sNoCommands        Keine Befehle für %s angegeben!
+sNotEnoughMem      Diese Applikation benötigt %d KB Hauptspeicher, es stehen aber nur %d KB zur Verfügung.
+sMenuReadError     Lesefehler: Menüdatei %s kann nicht gelesen werden!
+sMenuWriteError    Schreibfehler: Menüdatei %s kann nicht gesichert werden!
+sNoMenuItems       Keine Menüpunkte vorhanden.
+sDirNotFoundError  Startverzeichnis %s existiert nicht. Ausführung abgebrochen.
+
+; PCHPW
+sEnterOldPassword  Bitte ALTES Passwort eingeben.
+sEnterNewPassword1 Bitte NEUES Passwort eingeben.
+sEnterNewPassword2 Bitte nochmals neues Passwort eingeben.
+sPasswordChanged   Das Passwort wurde geändert.
+sWrongPassword     Sie haben das falsche Passwort eingegeben. Es wurde nicht geändert.
+sAccessDenied      Zugriff verweigert!
+
+; PCHRUN
+sMSDOSNotFound     COMMAND.COM nicht gefunden.
+sMSDOSError        Fehler beim Ausführen von COMMAND.COM.
+sBatchFileError    Batchdatei %s kann nicht erstellt werden.
+
+; PCHTOOLS
+sWorkingOn         Bearbeite Laufwerk
+sSearchingFor      Suche nach %s Dateien...
+sFound             \32%d gefunden
+sDeleting          Lösche %d Dateien...
+sWrongSpec         Dateien vom Typ %s dürfen von dieser Routine nicht gelöscht werden.
+sStatistic         Laufwerk %c: %d von %d Dateien wurden gelöscht.\13%d KBytes Speicherplatz wurden gewonnen.
+sAutoCD            Auto-ChangeDir
+sDontknowTree      Baumstruktur von Laufwerk %c: ist nicht bekannt. Jetzt einlesen ?
+sTreeFileWError    Schreibfehler: Baumstruktur konnte nicht gesichert werden!
+sReadNewTree       Verzeichnis %s nicht gefunden. Baumstruktur neu einlesen und nochmals versuchen ?
+sMDirsFound        Mehrere Verzeichnisse gefunden...
+
+; PCHTETRIS
+sNewGameAsk        Wirklich neues Spiel beginnen?
+sNewGame           ~N~eues Spiel
+sPause             ~P~ause
+sEnd               ~E~nde
+sGameOver          GAME OVER !
+sInfoView          Punkte:\13\13Volle Linien:\13\13Level:
+
+; verschiedene Wörter
+sOk                O~K~
+sCancel            Abbruch
+sMainGroup         Hauptgruppe
+sPassword          Passwort
