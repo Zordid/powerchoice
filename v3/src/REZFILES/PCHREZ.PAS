@@ -299,11 +299,11 @@ Begin
   Control := New(PStaticText, Init(R, '(1 bis 3)'));
   Dlg^.Insert(Control);
   R.Assign(32,2,46,4);
-  Control := New(PButton, Init(R, '~W~echseln', cmCancel, bfNormal));
+  Control := New(PButton, Init(R, '~W~echseln', cmNo, bfNormal));
   Control^.HelpCtx := hcSwitchGroupButton;
   Dlg^.Insert(Control);
   R.Assign(32,5,46,7);
-  Control := New(PButton, Init(R, '~L~öschen', cmCancel, bfNormal));
+  Control := New(PButton, Init(R, '~L~öschen', cmYes, bfNormal));
   Control^.HelpCtx := hcDeleteButton;
   Dlg^.Insert(Control);
   R.Assign(6,8,18,10);

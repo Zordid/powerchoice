@@ -90,7 +90,7 @@ Implementation
     PWTable: Word;
     I: Byte;
   Begin
-    Assign(F, PchPath+'PCHPW.SYS');
+    Assign(F, PWFileName);
     Reset(F, 1);
     Seek(F, 18);
     BlockRead(F, PWTable, 2);
@@ -107,7 +107,7 @@ Implementation
     PWTable: Word;
     I: Byte;
   Begin
-    Assign(F, PchPath+'PCHPW.SYS');
+    Assign(F, PWFileName);
     Reset(F, 1);
     Seek(F, 18);
     BlockRead(F, PWTable, 2);

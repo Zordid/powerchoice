@@ -33,8 +33,10 @@ Interface
 
     { Optionen }
     OptionsArea: String[11]= 'OPTIONSAREA';
-    PchPath: String[80]= 'C:\PCHOICE\';
-    BatchFileName: String[15]= 'C:\PCH.BAT';
+    PchPath: String[40]= 'C:\PCHOICE\';
+    UserPath: String[40]= 'C:\PCHOICE\';
+    BatchFileName: String[40]= 'C:\PCHOICE\PCH.BAT';
+    PWFileName: String[40]= 'C:\PCHOICE\PCHPW.SYS';
     { weitere Konstanten }
     HelpFileName= 'PCHHELP.HLP';
     MenuFileName= 'PCHOICE.MNU';
@@ -78,7 +80,8 @@ Interface
 
 Implementation
   Uses
-    Overlay, Drivers, Memory, StrUtl, Views, App, MsgBox, PchHelp, PchMenu;
+    Overlay, Drivers, Memory, StrUtl, Views, App, MsgBox,
+    PchHelp, PchMenu;
 
   Const
     GlbMsg: PStringList= Nil;

@@ -21,7 +21,6 @@ Uses
 {$O HelpFile}
 {$O AsciiTab}
 {$O Calc}
-{$O DosTools}
 {$O Editor}
 {$O PchDos}
 {$O PchPW}

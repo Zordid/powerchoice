@@ -156,7 +156,7 @@ Implementation
       DelStr:=GetMsg(sDeleting);
       ErrorSave:=StreamError;
       StreamError:=nil;
-      Strm.Init(PchPath+'PCHOICE.INI', stOpen, 1024);
+      Strm.Init(UserPath+'PCHOICE.INI', stOpen, 1024);
       Strm.Read(Options, SizeOf(Options));
       Strm.Done;
       StreamError:=ErrorSave;
@@ -174,7 +174,7 @@ Implementation
         Dlg^.GetData(Options);
         StrUpr(Options.Drives);
         StrUpr(Options.FileSpecs);
-        Strm.Init(PchPath+'PCHOICE.INI', stCreate, 1024);
+        Strm.Init(UserPath+'PCHOICE.INI', stCreate, 1024);
         Strm.Write(Options, SizeOf(Options));
         Strm.Done;
         StrMove(WrdDelim, ' ,;');
@@ -317,7 +317,7 @@ Implementation
       FileName: String;
       S: TBufStream;
     Begin
-      StrMove(FileName, PchPath);
+      StrMove(FileName, UserPath);
       StrCat(FileName, 'TREE', 255);
       ChrCat(FileName, Drive);
       StrCat(FileName, '.DAT', 255);
@@ -331,7 +331,7 @@ Implementation
       FileName: String;
       S: TBufStream;
     Begin
-      StrMove(FileName, PchPath);
+      StrMove(FileName, UserPath);
       StrCat(FileName, 'TREE', 255);
       ChrCat(FileName, Drive);
       StrCat(FileName, '.DAT', 255);

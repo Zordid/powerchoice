@@ -283,6 +283,7 @@ Implementation
     Quick: Boolean;
     MemArray: Array[1..2] Of LongInt;
     DosCmds, PchCmds: PTextBlock;
+    P: Pointer;
 
     Function SplitCmds: Boolean;
     Var
@@ -340,7 +341,7 @@ Implementation
       Begin
         If DosCmds^.Empty And PchCmds^.Empty Then
         Begin
-          MessageBox(GetMsg(sNoCommands), @Name, mfInformation+mfOkButton);
+          MessageBox(GetMsg(sNoCommands), @Name.P, mfInformation+mfOkButton);
         End Else
         Begin
           ClockGlb:=(Options And miClock)<>0;

@@ -1,3 +1,4 @@
+{$G+}
 Program Register;
 Uses Crt, Dos, Objects, PchReg;
 

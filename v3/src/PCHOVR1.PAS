@@ -12,7 +12,7 @@ Interface
 Implementation
   Uses
     Crt, Dos, Objects, Drivers, Views, Menus, Dialogs,
-    AsciiTab, HelpFile, Fields, HintStat, Calc,
+    AsciiTab, HelpFile, Fields, HintStat, Calc, DosTools,
     DateUtl, StrObj, TextObj, Editor,
     PchGlb, PchDos, PchMenu, PchPW, PchTetris,
     Messages;

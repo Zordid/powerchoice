@@ -191,7 +191,7 @@ Implementation
     Mode: Word;
   Begin
     AllClearDeskTop;
-    S.Init(PchPath+DeskFileName, stOpen, 1024);
+    S.Init(UserPath+DeskFileName, stOpen, 1024);
     If S.Status=stOk Then
     Begin
       S.Read(ID, SizeOf(ID));
@@ -246,7 +246,7 @@ Implementation
       If P <> Desktop^.Last Then S.Put(P);
     End;
   Begin
-    S.Init(PchPath+DeskFileName, stCreate, 1024);
+    S.Init(UserPath+DeskFileName, stCreate, 1024);
     S.Write(DskID, SizeOf(DskID));
     { Optionen speichern }
     S.Write(DosOptions, SizeOf(DosOptions));
