@@ -12,7 +12,7 @@ Interface
 Implementation
   Uses
     Crt, Dos, Objects, Drivers, Views, Menus, Dialogs,
-    AsciiTab, HelpFile, Fields, ColorSel, HintStat, Calc,
+    AsciiTab, HelpFile, Fields, HintStat, Calc,
     DateUtl, StrObj, TextObj, Editor,
     PchGlb, PchDos, PchMenu, PchPW, PchTetris;
 
@@ -79,7 +79,7 @@ Implementation
   Procedure ContactLowLevel;
   Begin
     GetIntVec($60, Pointer(LowLevel));
-    If LowLevel^.ID<>'PCH300' Then
+    If LowLevel^.ID<>'PCH301' Then
     Begin
       PrintStr('Low level driver not installed or not found.'#13#10);
       PrintStr('Program halted.'#13#10);
@@ -131,7 +131,6 @@ Implementation
     QuickMem:=0;
     ReCalcMem;
     NormalMem:=(PtrRec(HeapEnd).Seg-PrefixSeg) Shr 6;
-    UserFileName:=NewStr(PchPath+'USER'+Chr(64+LowLevel^.Password));
   End;
 
 End.

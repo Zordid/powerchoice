@@ -18,33 +18,34 @@ Interface
     TLowLevel= Record
       IRET: Byte;
       ID: String[6];
-      Password,
       Clock: Byte;
       ScrSaver,
       WaitForKey,
-      Booted,
-      EnableEdit,
-      EnableDos: Boolean;
+      Booted: Boolean;
     End;
 
   Const
-    CustomColors: Boolean= False;
     SysOptions: TSysOptions=
       (AutoClose: True);
     DosOptions: TDosOptions=
       (Opt: 3; Prompt: '%s>'; Quick: 0; AutoCD: 1);
 
     { Optionen }
-    OptionsArea: String[7]= 'OPTIONS';
-    AskMainPW: Boolean= True;
+    OptionsArea: String[11]= 'OPTIONSAREA';
     PchPath: String[80]= 'C:\PCHOICE\';
     BatchFileName: String[15]= 'C:\PCH.BAT';
-    MenuFileName: String[12]= 'PCHOICE.MNU';
+    { Registrierung }
+    RegArea: String[7]= 'REGAREA';
+    SerialNo: LongInt= 0;
+    UserName: String[30]= 'nicht registriert';
+    UserCompany: String[30]= '';
     { weitere Konstanten }
     HelpFileName= 'PCHHELP.HLP';
+    MenuFileName= 'PCHOICE.MNU';
+    DeskFileName= 'PCHOICE.DSK';
     Editing: Boolean= False;
     UpdateHint: Boolean= False;
-    EditCommands: Set Of Byte= [cmNewMenuItem, cmEditMainGroup, cmChangeOrder];
+    EditCommands: Set Of Byte= [cmNewMenuItem, cmEditMainGroup];
     OldPathGlb: PString= Nil;
     ToPrintGlb: PString= Nil;
 
@@ -54,7 +55,6 @@ Interface
     LowLevel: PLowLevel;
     OldScreen: TScreen;
     OldPos: Word;
-    UserFileName: PString;
     QuickMem,
     NormalMem: LongInt;
     SavePathGlb,

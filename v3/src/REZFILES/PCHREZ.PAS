@@ -2,7 +2,7 @@
 {$M 16384,0,65536}
 Program PchRez;
 Uses
-  Objects, Drivers, Views, Dialogs, Menus, Fields, ColorSel, App,
+  Objects, Drivers, Views, Dialogs, Menus, Fields, App,
   PchCmds, PchMsg, PchHelp, PchOpt, HintStat, Editor;
 
 Var
@@ -140,10 +140,10 @@ Begin
 End;
 *)
 
-Procedure CreateMenuBar1;
+Procedure CreateMenuBar;
 Var MenuBar: PMenuBar;
 Begin
-  Writeln('Adding menubar 1 ...');
+  Writeln('Adding menubar...');
   R.Assign(0, 0, 80, 1);
   MenuBar:=New(PMenuBar, Init(R, NewMenu(
     NewSubMenu('~'+#240+'~', hcSystemMenu, NewMenu(
@@ -167,10 +167,9 @@ Begin
     NewSubMenu('~O~ptionen', hcOptionsMenu, NewMenu(
       NewItem('~S~ystem Optionen', '', kbNoKey, cmSysOptions, hcOSysOptions,
       NewItem('~D~os/Dos Shell Optionen', '', kbNoKey, cmDosOptions, hcODosOptions,
-      NewItem('~F~arbanpassung', '', kbNoKey, cmColors, hcOColors,
       NewLine(
       NewItem('~H~auptpasswort ändern', '', kbNoKey, cmChangePassword, hcOChangePassword,
-      nil)))))),
+      nil))))),
     NewSubMenu('~T~ools', hcToolsMenu, NewMenu(
       NewItem('~D~OS Shell', 'F4', kbF4, cmDosShell, hcTDosShell,
       NewItem('Verzeichnis ~w~echseln', 'F9', kbF9, cmChangeDir, hcTChangeDir,
@@ -189,51 +188,9 @@ Begin
       nil)))))),
     nil)
   )))))));
-  Rez.Put(MenuBar, 'MainMenuBar');
+  Rez.Put(MenuBar, 'MenuBar');
   Dispose(MenuBar, Done);
 End;
-
-(*
-Procedure CreateMenuBar2;
-Var MenuBar: PMenuBar;
-Begin
-  Writeln('Adding menubar 2 ...');
-  R.Assign(0, 0, 80, 1);
-  MenuBar:=New(PMenuBar, Init(R, NewMenu(
-    NewSubMenu('~'+#240+'~', hcSystemMenu, NewMenu(
-      NewItem('~Ü~ber Power-Choice', '', kbNoKey, cmAbout, hcSCopyright,
-      NewItem('~D~esktop leeren', '', kbNoKey, cmClearDesktop, hcSClearDesktop,
-      NewLine(
-      NewItem('~E~nde', 'Alt-X', kbAltX, cmDos, hcSQuit,
-      nil))))),
-    NewSubMenu('~O~ptionen', hcOptionsMenu, NewMenu(
-      NewItem('~D~os/Dos Shell Optionen', '', kbNoKey, cmDosOptions, hcODosOptions,
-      NewItem('~F~arbanpassung', '', kbNoKey, cmColors, hcOColors,
-      NewLine(
-      NewItem('~P~asswort ändern', '', kbNoKey, cmChangePassword, hcOChangePassword,
-      nil))))),
-    NewSubMenu('~T~ools', hcToolsMenu, NewMenu(
-      NewItem('~D~OS Shell', 'F4', kbF4, cmDosShell, hcTDosShell,
-      NewItem('Verzeichnis ~w~echseln', 'F9', kbF9, cmChangeDir, hcTChangeDir,
-      NewItem('~T~aschenrechner', '', kbNoKey, cmCalc, hcTCalculator,
-      NewItem('~A~scii-Tabelle', '', kbNoKey, cmAscii, hcTAscii,
-      NewItem('~F~estplatte aufräumen', '', kbNoKey, cmCleanDisk, hcTCleanDisk,
-      NewLine(
-      NewItem('Tet~r~is', '', kbNoKey, cmTetris, hcNoContext,
-      nil)))))))),
-    NewSubMenu('~F~enster', hcWindowMenu, NewMenu(
-      NewItem('~N~ächstes', 'F6', kbF6, cmNext, hcWNextPrev,
-      NewItem('~V~orheriges', 'Shift-F6', kbShiftF6, cmPrev, hcWNextPrev,
-      NewItem('~S~chließen', 'Alt-F3', kbAltF3, cmClose, hcWClose,
-      NewItem('~B~ewegen/Größe', 'Ctrl-F5', kbCtrlF5, cmResize, hcWResize,
-      NewItem('~Z~oom', 'F5', kbF5, cmZoom, hcWZoom,
-      nil)))))),
-    nil)
-  ))))));
-  Rez.Put(MenuBar, 'UserMenuBar');
-  Dispose(MenuBar, Done);
-End;
-*)
 
 Procedure CreateCmdEditDialog;
 Begin
@@ -436,107 +393,6 @@ Begin
   Dispose(Dlg, Done);
 End;
 
-Procedure CreateColorDialog;
-Var
-  Dlg: PColorDialog;
-  Groups: PColorGroup;
-Begin
-  Writeln('Adding ColorDialog...');
-  Groups :=
-    ColorGroup('Arbeitsfläche',
-      ColorItem('Hintergrund',          1, nil),
-    ColorGroup('Gruppen',
-      ColorItem('Rahmen Passiv',        77,
-      ColorItem('Rahmen Aktiv',         78,
-      ColorItem('Rahmen Symbole',       79,
-      ColorItem('Schalter',             80,
-      ColorItem('Schalter Gewählt',     81,
-      ColorItem('Schalter Hotkey',      82,
-      ColorItem('Edit: Schalter',       83,
-      ColorItem('Edit: " Gewählt',      84,
-      ColorItem('Edit: " Hotkey',       85,
-      ColorItem('Schalter Schatten',    86,
-      nil)))))))))),
-    ColorGroup('Menüs',
-      ColorItem('Normal',               2,
-      ColorItem('Deaktiviert',          3,
-      ColorItem('Hotkey',               4,
-      ColorItem('Hotkey Gewählt',       7,
-      ColorItem('Gewählt',              5,
-      ColorItem('Gewählt+Deaktiviert',  6, nil)))))),
-    ColorGroup('Dateifenster',
-      ColorItem('Rahmen Passiv',        8,
-      ColorItem('Rahmen Aktiv',         9,
-      ColorItem('Rahmen Symbole',      10,
-      ColorItem('Rollbalken',          11,
-      ColorItem('Rollbalken Pfeile',   12,
-      ColorItem('Text Normal',         13,
-      ColorItem('Text Intensiv',       14, nil))))))),
-    ColorGroup('Dos Shell',
-      ColorItem('Rahmen Passiv',       72,
-      ColorItem('Rahmen Aktiv',        73,
-      ColorItem('Rahmen Symbole',      74,
-      ColorItem('Rollbalken',          75,
-      ColorItem('Rollbalken Pfeile',   76,
-      nil))))),
-    ColorGroup('Hilfefenster',
-      ColorItem('Rahmen Passiv',       64,
-      ColorItem('Rahmen Aktiv',        65,
-      ColorItem('Rahmen Symbole',      66,
-      ColorItem('Rollbalken',          67,
-      ColorItem('Rollbalken Pfeile',   68,
-      ColorItem('Hilfetext',           69,
-      ColorItem('Hotlinks',            70,
-      ColorItem('Hotlinks Gewählt',    71,
-      nil)))))))),
-    ColorGroup('Dialoge',
-      ColorItem('Rahmen Passiv',       32,
-      ColorItem('Rahmen Aktiv',        33,
-      ColorItem('Rahmen Symbole',      34,
-      ColorItem('Text Normal',         37,
-      ColorItem('Label Normal',        38,
-      ColorItem('Label Gewählt',       39,
-      ColorItem('Label HotKey',        40,
-      ColorItem('Schalter Normal',     41,
-      ColorItem('Schalter Default',    42,
-      ColorItem('Schalter Gewählt',    43,
-      ColorItem('Schalter Gesperrt',   44,
-      ColorItem('Schalter Hotkey',     45,
-      ColorItem('Schalter Schatten',   46,
-      ColorItem('Cluster Normal',      47,
-      ColorItem('Cluster Gewählt',     48,
-      ColorItem('Cluster HotKey',      49,
-      ColorItem('Eingabe Normal',      50,
-      ColorItem('Eingabe Markiert',    51,
-      ColorItem('Eingabe Pfeile',      52,
-      ColorItem('History Pfeil',       53,
-      ColorItem('History Seiten',      54,
-      Nil))))))))))))))))))))),
-    Nil)))))));
-  Dlg := New(PColorDialog, Init('', Groups));
-  Rez.Put(Dlg, 'ColorDialog');
-  Dispose(Dlg, Done);
-End;
-
-(*
-Procedure CreateLockedDialog;
-Begin
-  Writeln('Adding LockedDialog...');
-  R.Assign(12,5,66,14);
-  New(Dlg, Init(R, ''));
-  Dlg^.Options := Dlg^.Options or ofCentered;
-  R.Assign(9,3,44,4);
-  Dlg^.Insert(New(PStaticText, Init(R, 'Ihr Passwort ist zur Zeit gesperrt.')));
-  R.Assign(5,5,48,6);
-  Dlg^.Insert(New(PStaticText, Init(R, 'Bitte schalten Sie den Computer wieder aus.')));
-  R.Assign(4,4,49,5);
-  Dlg^.Insert(New(PStaticText, Init(R, '---------------------------------------------')));
-  Dlg^.SelectNext(False);
-  Rez.Put(Dlg, 'LockedDialog');
-  Dispose(Dlg, Done);
-End;
-*)
-
 Procedure CreateCleanDialog;
 Begin
   Writeln('Adding CleanDlg...');
@@ -640,11 +496,9 @@ End;
 
 Procedure CreateDialogs;
 Begin
-  CreateColorDialog;
   CreateCmdEditDialog;
   CreateGroupEditDialog;
   CreateMainGroupEditDialog;
-  (* CreateLockedDialog; *)
   CreateCleanDialog;
   CreateCleanAskDialog;
   CreateSysOptionsDialog;
@@ -658,7 +512,6 @@ Begin
   RegisterViews;
   RegisterHintStat;
   RegisterFields;
-  RegisterColorSel;
   RegisterEditor;
   RegisterType(RStrListMaker);
   RegisterType(RClickTester);
@@ -672,8 +525,7 @@ Begin
   Strm := New(PBufStream, Init('PCHOICE1.REZ', stCreate, 1024));
   Rez.Init(Strm);
   CreateStatusLine;
-  CreateMenuBar1;
-  (* CreateMenuBar2; *)
+  CreateMenuBar;
   (* CreateHints; *)
   CreateDialogs;
   Rez.Done;

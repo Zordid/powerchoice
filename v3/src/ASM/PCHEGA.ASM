@@ -52,14 +52,11 @@ begin:   jmp install
 ; Pascal interface
                                     ; Record
 newint:    iret                     ;   IRET: Byte; 
-id         DB 6,"PCH300"            ;   ID: String[6];
-password   DB 1                     ;   Password,
+id         DB 6,"PCH301"            ;   ID: String[6];
 clock      DB 0                     ;   Clock: Byte;
 scrsaver   DB false                 ;   ScrSaver,
 waitforkey DB false                 ;   WaitforKey,
 booted     DB true                  ;   Booted,
-enableedit DB true                  ;   EnableEdit,
-enabledos  DB true                  ;   EnableDos: Boolean;
 minutes    DW 5*60*18               ;
                                     ; End;
 
@@ -275,8 +272,8 @@ ENDP SaverInt
 
 end_tsr  EQU $               ; Resident part ends here
 
-intromsg DB "Power-Choice Version 3.00",13,10
-         DB "(C) Copyright by Olaf Gottschalk 1991",13,10,"$"
+intromsg DB "Power-Choice Version 3.02",13,10
+         DB "(C) Copyright by Olaf Gottschalk 1990-93",13,10,"$"
 okmsg    DB "EGA/VGA Low-level driver installed.",13,10,"$"
 errormsg DB "Already installed.",7,13,10,"$"
 
@@ -297,9 +294,7 @@ install: mov dx, offset intromsg
 exit:    mov ax, 4c01h
          int 21h
 
-go:      mov al, [es:bx+1]
-         mov [password], 0         ; mov [password], al
-         mov dx, offset okmsg
+go:      mov dx, offset okmsg
          dos 9h
          mov ax, [minutes]
          mov [count], ax

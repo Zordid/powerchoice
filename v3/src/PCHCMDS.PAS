@@ -12,12 +12,9 @@ Interface
     cmEditmode       = 103;   { Edit │ Editmodus }
     cmNewMenuItem    = 104;   { Edit │ Menüpunkt einfügen }
     cmEditMainGroup  = 105;   { Edit │ Hauptgruppe editiren }
-    cmChangeOrder    = 106;   { Edit │ Reihenfolge ändern }
-    cmUserList       = 107;   { Edit │ Benutzerliste }
     { Optionen Menü }
     cmSysOptions     = 108;   { Optionen │ System Optionen }
     cmDosOptions     = 109;   { Optionen │ Dos Optionen }
-    cmColors         = 110;   { Optionen │ Farbanpassung }
     cmChangePassword = 111;   { Optionen │ Passwort ändern  }
     { Tools Menü }
     cmDosShell       = 112;   { Tools │ Dos Shell }
@@ -25,7 +22,6 @@ Interface
     cmCalc           = 114;   { Tools │ Taschenrechner }
     cmAscii          = 115;   { Tools │ Ascii Tabelle }
     cmCleanDisk      = 116;   { Tools │ Festplatte reinigen }
-    cmFileManager    = 117;   { Tools │ Datei-Manager }
     cmTetris         = 118;   { Tools │ Tetris }
 
   { Weitere Commands }
@@ -37,15 +33,6 @@ Interface
     cmMenuItem       = 1003;
     cmDeleteItem     = 12;    { Löschen Button (= cmYes) }
     cmSwitchGroup    = 13;    { Wechseln Button (= cmNo) }
-
-  { Kobold Commands }
-  Const
-    cmRead           = 200;
-    cmWrite          = 201;
-    cmCopy           = 202;
-    cmMove           = 203;
-    cmDelete         = 204;
-    cmRename         = 205;
 
   { Tetris Commands }
   Const

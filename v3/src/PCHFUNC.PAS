@@ -3,7 +3,6 @@ Unit PchFunc;
 {$F+,O+}
 Interface
 
-  Procedure Error(N: Byte);
   Procedure About;
   Procedure Ascii;
   Procedure Calculator;
@@ -25,30 +24,33 @@ Implementation
     PchGlb, PchCmds, PchMsg, PchOpt, PchMenu, PchRun, PchDos,
     PchPW, PchTetris;
 
-  Procedure Error(N: Byte);
-  Var
-    P: String;
-    I: Integer;
-  Begin
-    Case N Of
-      2: MessageBox('Benutzerlistendatei ist nicht lesbar. Sofort beheben !', nil, mfError+mfOkButton);
-      3: MessageBox('Password ID Nummer oder Benutzerliste unbrauchbar. Sofort beheben !', nil, mfError+mfOkButton);
-      4, 5:
-         MessageBox('PCHPW.SYS ist nicht auffindbar oder fehlerhaft.#13'+
-        'Sofort (evtl. durch Neuinstallation) beheben !', nil, mfError+mfOkButton);
-      6: MessageBox('Das Hauptpasswort wurde erfolglos manipuliert.', nil, mfError+mfOkButton);
-    End;
-    If AskMainPW And (MasterPassword<>'') Then
-      Repeat
-      Until CheckPassword('Bitte Hauptpasswort eingeben', nil, MasterPassword);
-  End;
-
   Procedure About;
-  Var Dlg: PDialog;
+  Var
+    Dlg: PDialog;
+    R: TRect;
+    S: String;
+    T: String[5];
+    I: Byte;
   Begin
     Dlg:=PDialog(GetRez('AboutDialog'));
     If Dlg<>Nil Then
     Begin
+      R.Assign(14, 7, 40, 8);
+      Dlg^.Insert(New(PStaticText, Init(R, UserName)));
+      R.Assign(14, 8, 40, 9);
+      Dlg^.Insert(New(PStaticText, Init(R, UserCompany)));
+      If SerialNo<>0 Then
+      Begin
+        Str(LongRec(SerialNo).Hi:4, S);
+        Str(Hi(LongRec(SerialNo).Lo):3, T);
+        S:=S+'-'+T;
+        Str(Lo(LongRec(SerialNo).Lo)+93:2, T);
+        S:=S+'-'+T;
+        For I:=1 To Length(S) Do If S[I]=' ' Then S[I]:='0';
+      End Else
+        S:='! RAUBKOPIE !';
+      R.Assign(14, 9, 40, 10);
+      Dlg^.Insert(New(PStaticText, Init(R, S)));
       DeskTop^.ExecView(Dlg);
       Dispose(Dlg, Done);
     End;
@@ -182,63 +184,48 @@ Implementation
     ID: LongInt;
     P: PView;
     S: TBufStream;
-    B: Byte;
-    Palette: PString;
     M: TPoint;
     Mode: Word;
   Begin
     AllClearDeskTop;
-    S.Init(UserFileName^+'.DSK', stOpen, 1024);
+    S.Init(PchPath+DeskFileName, stOpen, 1024);
     If S.Status=stOk Then
     Begin
       S.Read(ID, SizeOf(ID));
       If ID=DskID Then
       Begin
-        S.Read(B, SizeOf(Byte));
-        If B=LowLevel^.Password Then
+        { Optionen laden }
+        S.Read(DosOptions, SizeOf(DosOptions));
+        S.Read(SysOptions, SizeOf(SysOptions));
+        S.Read(Mode, SizeOf(Mode));
+        If (Mode<>ScreenMode) Then
+          Application^.SetScreenMode(Mode);
+        { Maus }
+        S.Read(DoubleDelay, SizeOf(DoubleDelay));
+        S.Read(MouseReverse, SizeOf(MouseReverse));
+        S.Read(MouseWhere, SizeOf(MouseWhere));
+        S.Read(M, SizeOf(M));
+        Asm
+          mov ax, 4
+          mov cx, M.X
+          mov dx, M.Y
+          int $33
+        End;
+        { SavePath }
+        S.Read(SavePathGlb, SizeOf(SavePathGlb));
+        OldPathGlb:=S.ReadStr;
+        { Views laden }
+        Repeat
+          P := PView(S.Get);
+          Desktop^.InsertBefore(Application^.ValidView(P), Desktop^.Last)
+        Until P = Nil;
+        If S.Status<>stOk Then
         Begin
-          { Optionen laden }
-          S.Read(DosOptions, SizeOf(DosOptions));
-          S.Read(SysOptions, SizeOf(SysOptions));
-          S.Read(Mode, SizeOf(Mode));
-          If (Mode<>ScreenMode) Then
-            Application^.SetScreenMode(Mode);
-          { Maus }
-          S.Read(DoubleDelay, SizeOf(DoubleDelay));
-          S.Read(MouseReverse, SizeOf(MouseReverse));
-          S.Read(MouseWhere, SizeOf(MouseWhere));
-          S.Read(M, SizeOf(M));
-          Asm
-            mov ax, 4
-            mov cx, M.X
-            mov dx, M.Y
-            int $33
-          End;
-          { SavePath }
-          S.Read(SavePathGlb, SizeOf(SavePathGlb));
-          OldPathGlb:=S.ReadStr;
-          Palette:=S.ReadStr;
-          If Palette<>nil Then
-          Begin
-            CustomColors:=True;
-            StrMove(Application^.GetPalette^, Palette^);
-            DisposeStr(Palette);
-            Application^.Redraw;
-          End;
-          { Views laden }
-          Repeat
-            P := PView(S.Get);
-            Desktop^.InsertBefore(Application^.ValidView(P), Desktop^.Last)
-          Until P = Nil;
-          If S.Status<>stOk Then
-          Begin
-            MessageBox(GetMsg(sDesktopReadError), nil, mfError+mfOkButton);
-            ClearDeskTop;
-          End;
-          S.Done;
-          Exit;
-        End Else
-          MessageBox(GetMsg(sWrongDesktopFile), nil, mfError+mfOkButton);
+          MessageBox(GetMsg(sDesktopReadError), nil, mfError+mfOkButton);
+          ClearDeskTop;
+        End;
+        S.Done;
+        Exit;
       End Else
         MessageBox(GetMsg(sWrongDesktopFile), nil, mfError+mfOkButton);
     End;
@@ -256,9 +243,8 @@ Implementation
       If P <> Desktop^.Last Then S.Put(P);
     End;
   Begin
-    S.Init(UserFileName^+'.DSK', stCreate, 1024);
+    S.Init(PchPath+DeskFileName, stCreate, 1024);
     S.Write(DskID, SizeOf(DskID));
-    S.Write(LowLevel^.Password, SizeOf(LowLevel^.Password));
     { Optionen speichern }
     S.Write(DosOptions, SizeOf(DosOptions));
     S.Write(SysOptions, SizeOf(SysOptions));
@@ -277,11 +263,6 @@ Implementation
     { Savepath }
     S.Write(SavePathGlb, SizeOf(SavePathGlb));
     S.WriteStr(OldPathGlb);
-    If CustomColors Then
-      StrMove(Palette, Application^.GetPalette^)
-    Else
-      Palette:='';
-    S.WriteStr(@Palette);
     { Views speichern }
     Desktop^.ForEach(@WriteView);
     S.Put(nil);
@@ -289,7 +270,7 @@ Implementation
     If S.Status<>stOk Then
     Begin
       MessageBox(GetMsg(sDesktopWriteError), nil, mfError+mfOkButton);
-      FileDelete(UserFileName^+'.DSK');
+      FileDelete(DeskFileName);
     End;
   End;
 

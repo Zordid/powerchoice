@@ -477,7 +477,6 @@ Implementation
 
   Constructor TDosShell.Load(Var S: TStream);
   Begin
-    If (LowLevel^.Password<>0) And (UserList[UserNo].Access And 1=0) Then Fail;
     TWindow.Load(S);
     GetSubViewPtr(S, Interior);
     GetSubViewPtr(S, Indicator);

@@ -1,4 +1,10 @@
-# MAKE-Datei für Power-Choice 3.0
+############################################################
+# MAKE-Datei für Power-Choice 3.02                         #
+#                                                          #
+# Benötigte Tools:                                         #
+#   TPC.EXE, TASM.EXE, TLINK.EXE, EXE2BIN.EXE TVRM.EXE     #
+#                                                          #
+############################################################
 ASM=ASM        # Assembler Unterverzeichnis
 REZ=REZFILES   # Resource Unterverzeichnis
 RUN=D:         # EXE-Verzeichnis  
@@ -8,18 +14,13 @@ RUN=D:         # EXE-Verzeichnis
 
 pchoice.exe: pch*.pas initovr.pas pchoice.rez
   tpc /M /U$(REZ) pchoice.pas
-  copy /b $(RUN)\$.+$(RUN)\$&.ovr+pchoice.rez $(RUN)\$.
-  checkpos $(RUN)\$. userlst
-  copy $(RUN)\$. c:\pchoice
+  copy /b $(RUN)\$.+$(RUN)\$&.ovr+$&.rez c:\pchoice\$.
 
 pchoice.rez: $(REZ)\pchstr.rez $(REZ)\pchdlgs.rez $(REZ)\pchoice1.rez
   cd $(REZ)
-  copy pchstr.rez pchoice.rez
-  makerez
-  copy pchoice.rez ..
-  del pchoice.rez
+  tvrm c pchstr+pchdlgs+pchoice1 pchoice
+  move pchoice.rez ..
   cd..
-  tvrm p pchoice
 
 $(ASM)\pchpw.sys: $(ASM)\pchpw.obj
   tlink /x $*.obj

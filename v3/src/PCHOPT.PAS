@@ -43,11 +43,10 @@ Interface
 
   Procedure SetSysOptions;
   Procedure SetDosOptions;
-  Procedure ChangeColors;
 
 Implementation
   Uses
-    StrUtl, Menus, App, ColorSel, PchCmds, PchGlb;
+    StrUtl, Menus, App, PchCmds, PchGlb;
 
   { TClickTester }
   Constructor TClickTester.Load(Var S: TStream);
@@ -164,40 +163,6 @@ Implementation
     End;
     Message(DeskTop, evBroadcast, cmRedrawPrompt, nil);
     Message(DeskTop, evBroadcast, cmRedrawMem, nil);
-  End;
-
-  Procedure ChangeColors;
-  Const
-    Registered: Boolean= False;
-  Var
-    Dlg: PColorDialog;
-    Palette: PPalette;
-  Begin
-    If Not Registered Then
-    Begin
-      RegisterType(RColorSelector);
-      RegisterType(RMonoSelector);
-      RegisterType(RColorDisplay);
-      RegisterType(RColorGroupList);
-      RegisterType(RColorItemList);
-      RegisterType(RColorDialog);
-      Registered:=True;
-    End;
-    Dlg:=PColorDialog(GetRez('ColorDialog'));
-    If Dlg<>nil Then
-    Begin
-      Palette:=Application^.GetPalette;
-      Dlg^.SetData(Palette^);
-      If DeskTop^.ExecView(Dlg)=cmOK Then
-      Begin
-        Dlg^.GetData(Palette^);
-        CustomColors:=True;
-      End;
-      Dispose(Dlg, Done);
-    End;
-    DoneVideo;
-    InitVideo;
-    Application^.Redraw;
   End;
 
 End.

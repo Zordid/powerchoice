@@ -7,7 +7,7 @@ Uses
   Overlay, StrUtl, StrObj, DateUtl, DosTools,
   { Turbo Vision units: }
   Objects, Drivers, Views, Menus, Dialogs, App, MsgBox, StdDlg, Editor,
-  HelpFile, Fields, AsciiTab, HistList, HintStat, ColorSel, Calc,
+  HelpFile, Fields, AsciiTab, HistList, HintStat, Calc, Gadgets,
   { Power-Choice units: }
   PchGlb, PchCmds, PchHelp, PchOpt, PchMsg, PchPW, PchRun, PchOvr1,
   PchDos, PchMenu, PchFunc, PchTools, PchTetris;
@@ -16,7 +16,6 @@ Uses
 {$O StdDlg}
 {$O MsgBox}
 {$O HistList}
-{$O ColorSel}
 {$O Fields}
 {$O HelpFile}
 {$O AsciiTab}
@@ -35,7 +34,7 @@ Uses
 Type
   PPchoiceApp= ^TPchoiceApp;
   TPchoiceApp= Object(TApplication)
-    {Clock: PClockView;}
+    Clock: PClockView;
     MainMenu: PGroupItem;
     Constructor Init;
     Procedure InitMenuBar; virtual;
@@ -60,7 +59,7 @@ Begin
   With LowLevel^ Do
   Begin
     If Booted Then
-      PrintStr(#10#13' Power-Choice Version 3.01  (c) Copyright 1990-93 by Olaf Gottschalk'#10#13);
+      PrintStr(#10#13' Power-Choice Version 3.02  (c) Copyright 1990-93 by Olaf Gottschalk'#10#13);
     If WaitForKey Then WaitForEvent;
     Clock:=0;
     ScrSaver:=True;
@@ -70,17 +69,16 @@ Begin
   InitResource;           { Init resource file }
   InitVars;               { Init variables }
   TApplication.Init;      { Init the application }
-  {Clock:=Nil;}             { Set Clock to Nil }
+  Clock:=Nil;             { Set Clock to Nil }
   DisableCommands(EditCommands);
   With LowLevel^ Do
   Begin
-    InitUserSystem;
     { Load menu+desktop }
     If LoadMenu(MainMenu, PchPath+MenuFileName) Then
     Begin
       If Booted Then
       Begin
-        If FileExists(UserFileName^+'.DSK') Then LoadDeskTop Else ClearDeskTop;
+        If FileExists(PchPath+DeskFileName) Then LoadDeskTop Else ClearDeskTop;
         SavePathGlb:=True;
       End Else LoadDeskTop;
     End Else ClearDeskTop;
@@ -94,18 +92,14 @@ Begin
         Message(DeskTop, evBroadcast, cmRedrawPrompt, nil);
       End;
     End;
-    If Booted Then
-      DeskTop^.ExecView(PDialog(GetRez('AboutDialog')));
+    If Booted Then About;
     Booted:=False;
   End;
 End;
 
 Procedure TPchoiceApp.InitMenuBar;
 Begin
-  If LowLevel^.Password=0 Then
-    MenuBar := PMenuBar(GetRez('MainMenuBar'))
-  Else
-    MenuBar := PMenuBar(GetRez('UserMenuBar'));
+  MenuBar:=PMenuBar(GetRez('MenuBar'))
 End;
 
 Procedure TPchoiceApp.InitStatusLine;
@@ -142,8 +136,6 @@ Begin
         cmEditmode: Editmode;
         cmDosOptions: SetDosOptions;
         cmSysOptions: SetSysOptions;
-        cmColors: ChangeColors;
-        cmUserList: EditUserList;
         cmEditMainGroup: EditMainGroup;
         cmAscii: Ascii;
         cmCalc: Calculator;
@@ -187,7 +179,6 @@ Var
   E: TEvent;
 Begin
   TApplication.Idle;
-  {
   If Clock=Nil Then
   Begin
     R.Assign(71, 0, 80, 1);
@@ -195,7 +186,6 @@ Begin
     Insert(Clock);
   End;
   Clock^.Update;
-  }
   If ReCalcMem Then
     Message(DeskTop, evBroadcast, cmRedrawMem, nil);
   If TypeOf(DeskTop^.Current^)=TypeOf(TTetris) Then

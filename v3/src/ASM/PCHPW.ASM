@@ -54,11 +54,6 @@ request DW ?, ?
 
 ; Routines
 
-PROC dataint FAR
-         iret
-password DB 0
-ENDP
-
 PROC strategy FAR
          mov [cs:request], bx
          mov [cs:request+2], es
@@ -84,12 +79,6 @@ ENDP interrupt
 ; End of "resident" part
 
 PROC init NEAR
-         push es
-         xor ax, ax
-         mov es, ax
-         mov [WORD PTR es:60h*4], offset dataint
-         mov [WORD PTR es:60h*4+2], cs
-         pop es
          call askpwd
          mov [WORD LOW(request_header PTR di).rh_addr], offset init
          mov [WORD HIGH(request_header PTR di).rh_addr], cs
@@ -98,7 +87,6 @@ PROC init NEAR
 ENDP init
 
 maxlen EQU 30
-maxpw  EQU 10
 
 PROC askpwd NEAR
          pushm <ds, di>
@@ -107,38 +95,26 @@ PROC askpwd NEAR
          cmp [pwtable], 0
          je nopw
 frage:   call getinput          ; get user's input
-         mov cx, maxpw+1        ; cx equals number of passwords
          mov si, offset input   ; ds:si points to input
          push ds
          pop es
          mov di, offset pwtable ; es:di points to table
-         mov bx, 1
-nextpw:  cmp al, [di]
-         jne next
+         cmp al, [di]
+         jne wrong
          ; lengths are equal, so compare rest
-         pushm <cx, si, di>
-         mov cx, ax
          inc di
+         mov cx, ax
          cld
          repe cmpsb             ; compare strings
-         popm <di, si, cx>
          je right
          ; try next password
-next:    mov dl, [BYTE PTR di]
-         xor dh, dh
-         add di, dx
-         inc di
-         inc bx
-         loop nextpw
-         mov dx, offset wrong
+wrong:   mov dx, offset wrongtxt
          mov ah, 9
          int 21h
          jmp frage
-right:   mov dx, offset ok
+right:   mov dx, offset oktxt
          mov ah, 9
          int 21h
-         dec bl
-         mov [password], bl
 nopw:    popm <di, ds>
          ret
 ENDP askpwd
@@ -175,12 +151,11 @@ ENDP getinput
 
 input    DB maxlen+1 DUP (0)
 key      DB "o─╖", 13, 10, "$"
-wrong    DB 13, "  X", 13, 10, "$"
-ok       DB 13, "OK...", 13, 10, 10, "$"
+wrongtxt DB 13, "  X", 13, 10, "$"
+oktxt    DB 13, "OK...", 13, 10, 10, "$"
 
 LABEL pwtable BYTE
-pw0      DB 0
-pws      DB maxpw DUP (0)
+pw       DB maxlen+1 DUP (0)
 
 ENDS CODE
 END
