@@ -5,13 +5,13 @@ Interface
 
   Type
     TSysOptions= Record
-      AutoClose: Boolean;
+      DisplayLines: Word;
+      AutoClose: Word;
     End;
     TDosOptions= Record
-      Opt: Word;
+      DosShellOpt: Word;
       Prompt: String[10];
-      Quick: Word;
-      AutoCD: Word;
+      DosOpt: Word;
     End;
     TScreen= Array[0..24, 0..79] Of Word;
     PLowLevel= ^TLowLevel;
@@ -22,27 +22,31 @@ Interface
       ScrSaver,
       WaitForKey,
       Booted: Boolean;
+      Password: String[15];
     End;
 
   Const
     SysOptions: TSysOptions=
-      (AutoClose: True);
+      (DisplayLines: 0; AutoClose: 1);
     DosOptions: TDosOptions=
-      (Opt: 3; Prompt: '%s>'; Quick: 0; AutoCD: 1);
+      (DosShellOpt: 2; Prompt: '%s>'; DosOpt: 3);
 
     { Optionen }
     OptionsArea: String[11]= 'OPTIONSAREA';
     PchPath: String[80]= 'C:\PCHOICE\';
     BatchFileName: String[15]= 'C:\PCH.BAT';
-    { Registrierung }
-    RegArea: String[7]= 'REGAREA';
-    SerialNo: LongInt= 0;
-    UserName: String[30]= 'nicht registriert';
-    UserCompany: String[30]= '';
     { weitere Konstanten }
     HelpFileName= 'PCHHELP.HLP';
     MenuFileName= 'PCHOICE.MNU';
+    ExeFileName = 'PCHOICE.EXE';
+    RezFileName = 'PCHOICE.EXE';
+    {$IFNDEF IDE}
+    OvrFileName = 'PCHOICE.EXE';
     DeskFileName= 'PCHOICE.DSK';
+    {$ELSE}
+    OvrFileName = 'PCHOICE.OVR';
+    DeskFileName= 'PCHIDE.DSK';
+    {$ENDIF}
     Editing: Boolean= False;
     UpdateHint: Boolean= False;
     EditCommands: Set Of Byte= [cmNewMenuItem, cmEditMainGroup];
@@ -50,7 +54,6 @@ Interface
     ToPrintGlb: PString= Nil;
 
   Var
-    EXEName: String[80];
     RezFile: TResourceFile;
     LowLevel: PLowLevel;
     OldScreen: TScreen;
@@ -140,7 +143,7 @@ Implementation
       If GlbHint=Nil Then
         GlbHint:=PStringList(RezFile.Get('Hints'));
       If GlbHint<>Nil Then
-        StrMove(Hint, GlbHint^.Get(Ctx-hcMenuStart));
+        StrMove(Hint, GlbHint^.Get(Ctx));
     End Else
     Begin
       Button:=PGroupWindow(DeskTop^.Current)^.Current;

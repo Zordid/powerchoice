@@ -1,13 +1,11 @@
 {$A+,B-,E+,L+,F-,G+,N-,O-,V-,X+}
 
-{$IFDEF CHECKING}
-  {$I+,S+,R-}
-{$ELSE}
-  {$I-,S-,R-}
+{$IFDEF IDE}
+  {$DEFINE DEBUG}
 {$ENDIF}
 
 {$IFDEF DEBUG}
-  {$D+}
+  {$D+,I+,S+,R+}
 {$ELSE}
-  {$D-}
+  {$D-,I-,S-,R-}
 {$ENDIF}

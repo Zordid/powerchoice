@@ -1,5 +1,5 @@
 @echo off
-echo INSTALL.BAT installiert Power-Choice 3.0 nun im Verzeichnis
+echo INSTALL.BAT installiert Power-Choice 3.1 nun im Verzeichnis
 echo C:\PCHOICE. Falls dieses Verzeichnis schon existiert, MUSS es
 echo erst beseitigt und eine alte Version von Power-Choice entfernt
 echo werden !
@@ -11,6 +11,7 @@ c:
 cd \pchoice
 copy pch.bat ..
 del *.bat
+del register.exe
 echo Power-Choice wurde kopiert.
 echo.
 echo Die Datei PCHPW.SYS muß von Ihnen in der erste Zeile der Datei

@@ -99,7 +99,7 @@ Implementation
       Frame:=#196;
     End;
     MoveChar(B, Frame, Color, Size.X);
-    If DosOptions.Quick=1 Then
+    If (DosOptions.DosShellOpt And 1)=1 Then
       FormatStr(S, ' %d KB (QR) ', QuickMem)
     Else
       FormatStr(S, ' %d KB ', NormalMem);
@@ -118,7 +118,7 @@ Implementation
   Begin
     If Event.What=evMouseDown Then
     Begin
-      Boolean(DosOptions.Quick):=Not Boolean(DosOptions.Quick);
+      DosOptions.DosShellOpt:=DosOptions.DosShellOpt Xor 1;
       Draw;
     End;
   End;
@@ -311,7 +311,7 @@ Implementation
             End;
           kbTab:
             Begin
-              Boolean(DosOptions.Quick):=Not Boolean(DosOptions.Quick);
+              DosOptions.DosShellOpt:=DosOptions.DosShellOpt Xor 1;
               Owner^.Redraw;
             End;
           Else
@@ -413,9 +413,9 @@ Implementation
 {$ENDIF}
         If (IOResult<>0) Then
         Begin
-          If (DosOptions.AutoCD<>0) And
+          If (DosOptions.DosShellOpt And 2=2) And
             ((Length(UInputLine)<>2) Or (UInputLine[2]<>':')) Then
-            ChangeDirectory(UInputLine, DosOptions.AutoCD=2)
+            ChangeDirectory(UInputLine, False)
           Else
           Begin
             Sound(3000);
@@ -432,9 +432,9 @@ Implementation
     Begin
       OldPos:=(CursorY Shl 8)+CursorX;
       Path:='';
-      ClockGlb:=(DosOptions.Opt And 1)<>0;
-      ScrSaverGlb:=(DosOptions.Opt And 2)<>0;
-      WaitForKeyGlb:=(DosOptions.Opt And 8)<>0;
+      ClockGlb:=(DosOptions.DosOpt And 1)<>0;
+      ScrSaverGlb:=(DosOptions.DosOpt And 2)<>0;
+      WaitForKeyGlb:=(DosOptions.DosOpt And 8)<>0;
       ToPrintGlb:=NewStr(#10#13);
       RememberOldPath(False);
       New(P, Init(nil));
@@ -442,7 +442,7 @@ Implementation
       InputLine:='';
       InputPos:=1;
       ActHist:=0;
-      DosExec('', P, DosOptions.Quick=1);
+      DosExec('', P, (DosOptions.DosShellOpt And 1)=1);
       Dispose(P, Done);
     End;
   End;

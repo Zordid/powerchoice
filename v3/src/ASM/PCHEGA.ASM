@@ -1,4 +1,4 @@
-; Power-Choice 3.00 low-level driver
+; Power-Choice 3.10 low-level driver
 ; implements clock, sreen saver and data exchange for Power-Choice system
 ; requires EGA or VGA graphics card
 
@@ -52,11 +52,13 @@ begin:   jmp install
 ; Pascal interface
                                     ; Record
 newint:    iret                     ;   IRET: Byte; 
-id         DB 6,"PCH301"            ;   ID: String[6];
+id         DB 6,"PCH310"            ;   ID: String[6];
 clock      DB 0                     ;   Clock: Byte;
 scrsaver   DB false                 ;   ScrSaver,
 waitforkey DB false                 ;   WaitforKey,
-booted     DB true                  ;   Booted,
+booted     DB true                  ;   Booted : Boolean;
+password   DB 0                     ;   Password: String[15];
+           DB 15 DUP (?)
 minutes    DW 5*60*18               ;
                                     ; End;
 
@@ -185,13 +187,17 @@ old09    DD ?
 enabled  DB true             ; Screen on or off
 event    DB false            ; Event flag
 count    DW ?                ; Counter
+pos      DB 0
 
 ; Keyboard interrupt
 PROC New09 FAR
          push ax
-         in al, 60h
+         cmp [cs:enabled], false
+         je @isoff
+@ison:   in al, 60h
          cmp al, 0d8h
-         jne @1
+         jne @@1
+         ; F12 gedrückt
          in al, 61h
          or al, 80h
          out 61h, al
@@ -202,9 +208,44 @@ PROC New09 FAR
          mov [cs:count], 5
          pop ax
          iret
-@1:      mov [cs:event], true
-         pop ax
+@@1:     pop ax
+         mov [cs:event], true
          jmp [cs:old09]
+@isoff:  ; alte Int 09 Routine aufrufen
+         pushf
+         push cs
+         mov ax, offset @ret
+         push ax
+         jmp [cs:old09]
+@ret:    mov ah, 1
+         int 16h
+         jz @@3
+         push ds
+         push bx
+         mov ax, cs
+         mov ds, ax
+         mov bx, offset password+1
+         add bl, [pos]
+         mov ah, 0
+         int 16h
+         cmp [password], 0
+         je @@right
+         cmp al, [bx]
+         jne @@wrong
+         inc [pos]
+         mov al, [password]
+         cmp al, [pos]
+         jne @@2
+@@right: call ScreenOn
+         mov ax, [minutes]
+         mov [count], ax
+         mov [pos], 0
+         jmp @@2
+@@wrong: mov [pos], 0
+@@2:     pop bx
+         pop ds
+@@3:     pop ax
+         iret
 ENDP
 
 ; Switches display off
@@ -245,34 +286,32 @@ PROC ScreenOn NEAR
 ENDP
 
 PROC SaverInt FAR
-         pushm <ax, ds>
+         cmp [cs:ScrSaver], true
+         je @ok
+         jmp [cs:oldsaver]
+@ok:     pushm <ax, ds>
          mov ax, cs          ; Initialize data segment
          mov ds, ax
          mov ax, [minutes]   ; AX = Minutes
-         cmp ax, 0           ; Screen saver installed ?
-         je @@exit
          dec [count]         ; Decrease counter
-         jnz l01             ; Is it not zero ?
+         jnz @@1             ; Is it not zero ?
 
          mov [count], ax     ; Switch screen off and reset counter
-         cmp [ScrSaver], false ; Is screen saver active ?
-         je l01              ; No, then end.
          call ScreenOff
 
-l01:     cmp [event], false  ; Anything happened ?
-         je @@exit           ; No, then end.
+@@1:     cmp [event], false  ; Anything happened ?
+         je @exit            ; No, then end.
 
-         mov [count], ax     ; Reset counter and flag, switch screen on
+         mov [count], ax     ; Reset counter and flag
          mov [event], false
-         call ScreenOn
 
-@@exit:  popm <ds, ax>
+@exit:   popm <ds, ax>
          jmp [cs:oldsaver]   ; Back to old handler
 ENDP SaverInt
 
 end_tsr  EQU $               ; Resident part ends here
 
-intromsg DB "Power-Choice Version 3.02",13,10
+intromsg DB "Power-Choice Version 3.1",13,10
          DB "(C) Copyright by Olaf Gottschalk 1990-93",13,10,"$"
 okmsg    DB "EGA/VGA Low-level driver installed.",13,10,"$"
 errormsg DB "Already installed.",7,13,10,"$"

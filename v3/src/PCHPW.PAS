@@ -11,11 +11,12 @@ Interface
   Procedure SetPassword(P: String);
   Procedure GetPassword(Var P: String);
   Procedure ChangeUserPassword;
+  Procedure SetScreenSaverPassword;
 
 Implementation
   Uses
     StrUtl, DosTools, MsgBox, Fields, App, PchOpt, PchGlb, PchMsg, PchCmds,
-    PchFunc;
+    PchFunc, PchHelp;
 
   Type
     PPWInputLine= ^TPWInputLine;
@@ -44,20 +45,23 @@ Implementation
     Cmd, I: Word;
   Begin
     I:=(Length(Txt) Div 2)+3;
-    If I<15 Then I:=15;
+    If I<15 Then I:=17;
     R.Assign(40-I, 6, 40+I, 14);
     Dlg:=New(PDialog, Init(R, GetMsg(sPassword)));
     With Dlg^ Do
     Begin
+      HelpCtx:=hcPassword;
       R.Assign(4, 3, I*2-4, 4);
       Control:=New(PPWInputLine, Init(R, 15));
       Insert(Control);
       R.Assign(2, 2, Length(Txt)+3, 3);
       Insert(New(PLabel, Init(R, Txt, Control)));
-      R.Assign(I-13, 5, I-2, 7);
+      R.Assign(I-17, 5, I-7, 7);
       Insert(New(PButton, Init(R, GetMsg(sOK), cmOK, bfDefault)));
-      R.Assign(I+2, 5, I+13, 7);
+      R.Assign(I-6, 5, I+5, 7);
       Insert(New(PButton, Init(R, GetMsg(sCancel), cmCancel, bfNormal)));
+      R.Assign(I+6, 5, I+17, 7);
+      Insert(New(PButton, Init(R, '~H~ilfe', cmHelp, bfNormal)));
       Dlg^.SelectNext(False);
     End;
     Cmd:=DeskTop^.ExecView(Application^.ValidView(Dlg));
@@ -116,6 +120,7 @@ Implementation
   Procedure SetPassword(P: String);
   Begin
     WritePassword(P);
+    SetScreenSaverPassword;
   End;
 
   Procedure GetPassword(Var P: String);
@@ -140,6 +145,13 @@ Implementation
           MessageBox(GetMsg(sWrongPassword), nil, mfWarning+mfOKButton);
       End;
     End;
+  End;
+
+  Procedure SetScreenSaverPassword;
+  Var P: String;
+  Begin
+    ReadPassword(P);
+    LowLevel^.Password:=P;
   End;
 
 End.

@@ -2,7 +2,7 @@
 {$M 16384,8192,655360}
 Program Power_Choice;
 Uses
-  InitOvr, 
+  InitOvr,
   { TP units: }
   Overlay, StrUtl, StrObj, DateUtl, DosTools,
   { Turbo Vision units: }
@@ -10,7 +10,8 @@ Uses
   HelpFile, Fields, AsciiTab, HistList, HintStat, Calc, Gadgets,
   { Power-Choice units: }
   PchGlb, PchCmds, PchHelp, PchOpt, PchMsg, PchPW, PchRun, PchOvr1,
-  PchDos, PchMenu, PchFunc, PchTools, PchTetris;
+  PchDos, PchMenu, PchFunc, PchTools, PchTetris, PchReg,
+  Messages;
 
 {$O Menus}
 {$O StdDlg}
@@ -34,7 +35,11 @@ Uses
 Type
   PPchoiceApp= ^TPchoiceApp;
   TPchoiceApp= Object(TApplication)
+    {$IFDEF DEBUG}
+    Heap: PHeapView;
+    {$ELSE}
     Clock: PClockView;
+    {$ENDIF}
     MainMenu: PGroupItem;
     Constructor Init;
     Procedure InitMenuBar; virtual;
@@ -47,19 +52,16 @@ Type
     Destructor Done; virtual;
   End;
 
-Var
-  Pchoice: TPchoiceApp;
-
 Constructor TPchoiceApp.Init;
 Var
+  R: TRect;
   H: Word;
   S: String;
 Begin
-  { Detect Low-Level driver }
+  ContactLowLevel;
   With LowLevel^ Do
   Begin
-    If Booted Then
-      PrintStr(#10#13' Power-Choice Version 3.02  (c) Copyright 1990-93 by Olaf Gottschalk'#10#13);
+    If Booted Then PrintStr(msgTitle);
     If WaitForKey Then WaitForEvent;
     Clock:=0;
     ScrSaver:=True;
@@ -69,7 +71,14 @@ Begin
   InitResource;           { Init resource file }
   InitVars;               { Init variables }
   TApplication.Init;      { Init the application }
-  Clock:=Nil;             { Set Clock to Nil }
+  R.Assign(71, 0, 80, 1);
+  {$IFDEF DEBUG}
+  Heap:=New(PHeapView, Init(R));
+  Insert(Heap);
+  {$ELSE}
+  Clock:=New(PClockView, Init(R));
+  Insert(Clock);
+  {$ENDIF}
   DisableCommands(EditCommands);
   With LowLevel^ Do
   Begin
@@ -92,7 +101,11 @@ Begin
         Message(DeskTop, evBroadcast, cmRedrawPrompt, nil);
       End;
     End;
-    If Booted Then About;
+    If Booted Then
+    Begin
+      SetScreenSaverPassword;
+      About;
+    End;
     Booted:=False;
   End;
 End;
@@ -109,16 +122,13 @@ Begin
 End;
 
 Procedure TPchoiceApp.GetEvent(Var Event: TEvent);
-Var Mouse: Word;
 Begin
   TApplication.GetEvent(Event);
   If (Event.What=evCommand) And (Event.Command=cmHelp) Then
   Begin
-    {
-    If Not ShowHelp(PchPath+HelpFileName) Then
+    If Not ShowHelp(PchPath+HelpFileName, GetHelpCtx) Then
       MessageBox(GetMsg(sHelpFileNotFound), nil, mfError+mfOkButton);
     ClearEvent(Event);
-    }
   End;
 End;
 
@@ -144,12 +154,6 @@ Begin
         cmChangePassword: ChangeUserPassword;
         cmCleanDisk: CleanDisk;
         cmTetris: Tetris;
-        cmReset:
-          Begin
-            StoreDeskTop;
-            RezFile.Done;
-            ResetComputer;
-          End;
         Else Exit;
       End;
       ClearEvent(Event);
@@ -174,20 +178,15 @@ Begin
 End;
 
 Procedure TPchoiceApp.Idle;
-Var
-  R: TRect;
-  E: TEvent;
+Var E: TEvent;
 Begin
   TApplication.Idle;
-  If Clock=Nil Then
-  Begin
-    R.Assign(71, 0, 80, 1);
-    Clock:=New(PClockView, Init(R));
-    Insert(Clock);
-  End;
+  {$IFDEF DEBUG}
+  Heap^.Update;
+  {$ELSE}
   Clock^.Update;
-  If ReCalcMem Then
-    Message(DeskTop, evBroadcast, cmRedrawMem, nil);
+  {$ENDIF}
+  If ReCalcMem Then Message(DeskTop, evBroadcast, cmRedrawMem, nil);
   If TypeOf(DeskTop^.Current^)=TypeOf(TTetris) Then
   Begin
     E.What:=evCommand;
@@ -220,9 +219,10 @@ Begin
   End;
 End;
 
+Var Pch: TPchoiceApp;
+
 Begin
-  ContactLowLevel;
-  Pchoice.Init;
-  Pchoice.Run;
-  Pchoice.Done;
+  Pch.Init;
+  Pch.Run;
+  Pch.Done;
 End.

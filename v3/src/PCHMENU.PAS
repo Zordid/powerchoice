@@ -380,8 +380,8 @@ Implementation
       P: String[10]; 
       H, Path: String[80];
       Cmds: PTextBlock;
+      RMem: LongInt;
       O: Word;
-      RMem, RExtMem: LongInt;
     End;
   Var
     Dlg: PDialog;
@@ -403,7 +403,6 @@ Implementation
           StrMove(Path, DosPath.GetStr);
           O:=Options;
           RMem:=ReqMem;
-          RExtMem:=ReqExtMem;
         End;
         Dlg^.SetData(Data);
         Cmd:=DeskTop^.ExecView(Dlg);
@@ -419,7 +418,7 @@ Implementation
           Restricted:=[];
           Options:=O;
           ReqMem:=RMem;
-          ReqExtMem:=RExtMem;
+          ReqExtMem:=0;
         End;
         Dispose(Data.Cmds, Done);
         Dispose(Dlg, Done);
@@ -495,9 +494,8 @@ Implementation
   Type
     DlgRec= Record
       N: String[22]; {KeyInputline}
-      C: LongInt;  {NumInputline}
       P: String[10]; {Inputline}
-      (* R: String[80]; {Inputline} *)
+      C: LongInt;  {NumInputline}
     End;
   Var
     OldPage: PGroupWindow;
@@ -699,7 +697,7 @@ Implementation
     If H=hcNoContext Then
     Begin
       If Editing Then
-        GetHelpCtx:=hcEditMode
+        GetHelpCtx:=hcEditModeActive
       Else
         GetHelpCtx:=hcMenuPage;
     End Else
@@ -837,7 +835,7 @@ Implementation
         P:=New(PGroupWindow, Init(Group^.Owner, -1));
         DeskTop^.Insert(P);
       End;
-      If SysOptions.AutoClose Then Close;
+      If SysOptions.AutoClose=1 Then Close;
     End;
     HandleKey:
     TDialog.HandleEvent(Event);

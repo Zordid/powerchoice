@@ -5,28 +5,51 @@
 #   TPC.EXE, TASM.EXE, TLINK.EXE, EXE2BIN.EXE TVRM.EXE     #
 #                                                          #
 ############################################################
-ASM=ASM        # Assembler Unterverzeichnis
-REZ=REZFILES   # Resource Unterverzeichnis
-RUN=D:         # EXE-Verzeichnis  
+ASM=ASM           # Assembler Unterverzeichnis
+REZ=REZFILES      # Resource Unterverzeichnis
+RUN=D:            # EXE-Verzeichnis  
+TRY=C:\PCHOICE    # Zielverzeichnis
+# DEFINES=/DDEBUG   # TP Defines
 
 .asm.obj:
   tasm /m3 $<,$*.obj
 
-pchoice.exe: pch*.pas initovr.pas pchoice.rez
-  tpc /M /U$(REZ) pchoice.pas
-  copy /b $(RUN)\$.+$(RUN)\$&.ovr+$&.rez c:\pchoice\$.
-
+pchoice.exe: *.pas $(REZ)\pchhelp.pas pchoice.rez pchhelp.hlp
+  tpc /M /U$(REZ) $(DEFINES) pchoice.pas
+  copy /b $(RUN)\$.+$(RUN)\$&.ovr+$&.rez $(TRY)\$.
+  
 pchoice.rez: $(REZ)\pchstr.rez $(REZ)\pchdlgs.rez $(REZ)\pchoice1.rez
   cd $(REZ)
   tvrm c pchstr+pchdlgs+pchoice1 pchoice
   move pchoice.rez ..
   cd..
 
-$(ASM)\pchpw.sys: $(ASM)\pchpw.obj
+pchhelp.hlp: $(REZ)\pchhelp.pas
+
+$(REZ)\pchoice1.rez: $(REZ)\pchrez.pas $(REZ)\pchhelp.pas pchcmds.pas
+  cd $(REZ)
+  tpc /M /$D- /U$(REZ);.. /I.. pchrez.pas
+  d:pchrez
+  cd..
+
+$(REZ)\pchhelp.pas: $(REZ)\pchhelp.txt
+  cd $(REZ)
+  tvhc pchhelp.txt
+  move pchhelp.hlp $(TRY)
+  del $(TRY)\*.dsk
+  cd..
+
+pchpw.sys: $(ASM)\pchpw.obj
+  cd $(ASM)
   tlink /x $*.obj
   exe2bin $*.exe $<
   del $*.exe
+  move $< $(TRY)
+  cd..
 
-$(ASM)\pchega.com: $(ASM)\pchega.obj
+pchega.com: $(ASM)\pchega.obj
+  cd $(ASM)
   tlink /t /x $*.obj
+  move $< $(TRY)
+  cd..
 

@@ -22,35 +22,38 @@ Implementation
     Crt, StrUtl, DosTools,
     Objects, Drivers, Views, Dialogs, App, MsgBox, StdDlg, AsciiTab, Calc,
     PchGlb, PchCmds, PchMsg, PchOpt, PchMenu, PchRun, PchDos,
-    PchPW, PchTetris;
+    PchPW, PchTetris, PchReg;
 
   Procedure About;
   Var
     Dlg: PDialog;
     R: TRect;
-    S: String;
-    T: String[5];
+    S, T: String[20];
     I: Byte;
   Begin
     Dlg:=PDialog(GetRez('AboutDialog'));
     If Dlg<>Nil Then
     Begin
-      R.Assign(14, 7, 40, 8);
-      Dlg^.Insert(New(PStaticText, Init(R, UserName)));
-      R.Assign(14, 8, 40, 9);
-      Dlg^.Insert(New(PStaticText, Init(R, UserCompany)));
-      If SerialNo<>0 Then
+      R.Assign(14, 7, 43, 8);
+      Dlg^.Insert(New(PStaticText, Init(R, Reg.UserName)));
+      R.Assign(14, 8, 43, 9);
+      Dlg^.Insert(New(PStaticText, Init(R, Reg.UserCompany)));
+      If Reg.SerialNo<>0 Then
       Begin
-        Str(LongRec(SerialNo).Hi:4, S);
-        Str(Hi(LongRec(SerialNo).Lo):3, T);
-        S:=S+'-'+T;
-        Str(Lo(LongRec(SerialNo).Lo)+93:2, T);
-        S:=S+'-'+T;
+        Str(Lo(Reg.Date)+90:2, S);
+        Str(Hi(Reg.Date), T);
+        S:='AD'+S+T+'I';
+        Str(Reg.SerialNo:8, T);
+        S:=S+T;
         For I:=1 To Length(S) Do If S[I]=' ' Then S[I]:='0';
       End Else
         S:='! RAUBKOPIE !';
-      R.Assign(14, 9, 40, 10);
+      R.Assign(14, 9, 43, 10);
       Dlg^.Insert(New(PStaticText, Init(R, S)));
+      {$IFDEF DEBUG}
+      R.Assign(26, 1, 43, 2);
+      Dlg^.Insert(New(PStaticText, Init(R, 'DEBUGGING VERSION')));
+      {$ENDIF}
       DeskTop^.ExecView(Dlg);
       Dispose(Dlg, Done);
     End;
@@ -112,12 +115,12 @@ Implementation
     Begin
       ResetBatchFile;
       ClearPrompt;
-      ClockGlb:=(DosOptions.Opt And 1)=1;
-      ScrSaverGlb:=(DosOptions.Opt And 2)=2;
+      ClockGlb:=(DosOptions.DosOpt And 1)=1;
+      ScrSaverGlb:=(DosOptions.DosOpt And 2)=2;
       WaitforKeyGlb:=False;
       ToPrintGlb:=NewStr(GetMsg(sExitText));
       RememberOldPath(False);
-      If DosOptions.Opt And 4=4 Then ChDir('C:\');
+      If DosOptions.DosOpt And 4=4 Then ChDir('C:\');
       QuitToDos;
     End;
   End;

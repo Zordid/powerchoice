@@ -10,7 +10,7 @@ Implementation
   Uses
     Objects, Drivers, Views, Dialogs, App, MsgBox,
     Crt, Dos, DosTools, StrUtl,
-    PchCmds, PchMsg, PchGlb;
+    PchHelp, PchCmds, PchMsg, PchGlb;
 
   Procedure CleanDisk;
   Const
@@ -147,9 +147,10 @@ Implementation
     End;
 
   Begin
-    Dlg:=PDialog(GetRez('CleanDlg'));
+    Dlg:=PDialog(GetRez('CleanDialog'));
     If Dlg<>nil Then
     Begin
+      Dlg^.HelpCtx:=hcHDCleanDialog;
       SearchStr:=GetMsg(sSearchingFor);
       FoundStr:=GetMsg(sFound);
       DelStr:=GetMsg(sDeleting);

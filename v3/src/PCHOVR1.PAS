@@ -14,12 +14,8 @@ Implementation
     Crt, Dos, Objects, Drivers, Views, Menus, Dialogs,
     AsciiTab, HelpFile, Fields, HintStat, Calc,
     DateUtl, StrObj, TextObj, Editor,
-    PchGlb, PchDos, PchMenu, PchPW, PchTetris;
-
-  Procedure Ok(N: Byte);
-  Begin
-    PrintStr('Ok'+Char(N+Ord('0'))+#10#13);
-  End;
+    PchGlb, PchDos, PchMenu, PchPW, PchTetris,
+    Messages;
 
   Procedure RegisterTypes;
   Begin
@@ -79,10 +75,9 @@ Implementation
   Procedure ContactLowLevel;
   Begin
     GetIntVec($60, Pointer(LowLevel));
-    If LowLevel^.ID<>'PCH301' Then
+    If LowLevel^.ID<>'PCH310' Then
     Begin
-      PrintStr('Low level driver not installed or not found.'#13#10);
-      PrintStr('Program halted.'#13#10);
+      PrintStr(errLL_not_loaded);
       Halt(1);
     End;
   End;
@@ -100,7 +95,7 @@ Implementation
       Mov MouseThere, True
      @NoMouse:
     End;
-    PrintStr(#10#13'Beliebige (Maus-)Taste zur Wiederaufnahme von Power-Choice drücken !');
+    PrintStr(msgPress_any_key);
     Repeat
       If MouseThere Then
       Asm
@@ -117,11 +112,10 @@ Implementation
 
   Procedure InitResource;
   Begin
-    RezFile.Init(New(PBufStream, Init(EXEName, stOpen, 1024)));
-    If RezFile.Stream^.Status<>0 Then
+    RezFile.Init(New(PBufStream, Init(PchPath+RezFileName, stOpen, 1024)));
+    If (RezFile.Stream^.Status<>0) Or (RezFile.Count=0) Then
     Begin
-      PrintStr(EXEName+' is not containing ressources.'#13#10);
-      PrintStr('Program halted.'#13#10);
+      PrintStr(errNo_resources);
       Halt(1);
     End;
   End;

@@ -1,165 +1,148 @@
 .topic NoContext=0, MenuPage=999
 
- Power-Choice Version 3.0 ▄
-  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-Willkommen bei Power-Choice! Bitte wählen
-Sie aus dem Menü das gewünschte Programm
-indem Sie es mit der Maus "anklicken" oder
-über die Tastatur (mit Hilfe der Pfeiltasten)
-wählen und dann <Enter> drücken.
-Weitere Hilfetexte stehen zur Verfügung:
+   Power-Choice Version 3.1 ▄
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+Bitte wählen Sie aus dem Menü das gewünschte Programm aus.
+Sie können dazu die Tastatur oder eine Maus benutzen.
 
- {Hilfe zum Hilfesystem:Help}
- {Der Editiermodus:EditMode}
+Inhaltsverzeichnis der Hilfe:
+  {Editieren des Menüs|HelpOnEditing}
+  {Dos Befehle ausführen|HelpOnDosCommands}
+  {Der Bildschirm Schoner|HelpOnScreenSaver}
+  {Die Uhr|HelpOnClock}
+  {Hilfe über Hilfe|HelpOnHelp}
 
-.topic MenuStart=1000, SystemMenu
+.topic MenuStart=1000,SystemMenu
 
- ▄ System-Menü (Alt-Leertase)
- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ ▄ System-Menü <Alt-Leertaste>
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-Das System-Menü stellt folgende System
-Funktionen zur Verfügung:
+Das System-Menü stellt folgende Systemfunktionen zur Verfügung:
 
-  Über Power-Choice (zeigt Versionsnummer
-    und Copyright Meldung)
-  {Desktop leeren:SClearDesktop}
-  {Ende (Alt-X):SQuit}
+  Über Power-Choice
+  {Desktop leeren|SClearDesktop}
+  {Ende (Alt-X)|SQuit}
 
 .topic SCopyright
+
+  ∙ Über Power-Choice ∙
+
+Hiermit können Sie sich die Versions- und Copyrightinformationen
+von Power-Choice ansehen.
 
 .topic SClearDesktop
 
   ∙ Desktop leeren ∙
 
 Dieses Kommando dient zum Schließen aller geöffneten
-Fenster, wobei jedoch die Hauptgruppe wieder dargestellt
-wird.
+Fenster, mit Ausnahme der Hauptgruppe, die immer zu
+sehen ist.
 
 .topic SQuit
 
-  ∙ Ende (Alt-X) ∙
+  ∙ Ende <Alt-X> ∙
 
 Dieses Kommando dient zum Beenden von Power-Choice.
 Sie kehren zur Eingabeaufforderung von DOS zurück.
-Um Power-Choice erneut zu starten, müssen Sie den Namen
-der Batchdatei eingeben, den Sie im {Optionen-Dialog:Options}
-angegeben haben, zum Beispiel PCH.BAT.
+Um Power-Choice erneut zu starten, müssen sie
+einfach wieder PCH am DOS-Prompt eintippen.
 
-Beispiel:
-  C:\>PCH_
+Sie können auch in dem {Dos Shell Fenster|DosShell}
+DOS Kommandos eintippen, ohne Power-Choice ganz zu
+verlassen. Dadurch sparen Sie eine Menge Zeit !
 
 .topic EditMenu
 
- ▄ Das Edit-Menü (Alt-E)
- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ ▄ Das Bearbeiten-Menü <Alt-B>
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-Dieses Menü faßt die wichtigsten Editierfunktionen
+Dieses Menü faßt die Editierfunktionen
 von Power-Choice zusammen, mit denen sich die
-verschiedensten Aspekte des Programms anpassen
-lassen.
+Menüeinträge und die Menügruppen ändern lassen.
 
-  {Editmodus:EEditmode}:
+  {Editmodus|EEditmode}:
     Schaltet den Editmodus ein und aus.
-  {Menüpunkt hinzufügen:ENewItem}:
+  {Menüpunkt hinzufügen|ENewItem}:
     Zum Hinzufügen von neuen Menüpunkten
-  {Hauptgruppe editieren:EEditMainGroup}:
+    oder Gruppen.
+  {Hauptgruppe|EEditMainGroup}:
     Zum Editieren der Hauptgruppe
-  {Reihenfolge ändern:EChangeOrder}:
-    Zum Ändern der Reihenfolge der Menüpunkte
-  {Benutzerliste:EUserList}:
-    Zum Verändern der Benutzerliste;
-    nur mit Hauptpasswort möglich
 
 .topic EEditMode
 
-Dieser Befehl schaltet den {Editmodus:Editmode} ein und wieder aus.
+  ∙ Editmodus ∙
+
+Dieser Befehl schaltet den {Editmodus|Editmode} ein und wieder aus.
+Wenn Sie sich im Editmodus befinden, bewirkt die Wahl eines
+Menüeintrages nicht das Ausführen des zugehörigen Programms, sondern
+es erscheint eine Dialogbox, mit der sich der Menüeintrag editieren
+läßt.
 
 .topic ENewItem
 
   ∙ Neuer Menüpunkt ∙
 
-Zum Einfügen eines neuen Menüpunktes in die
-aktive Gruppe wählen Sie diese Funktion.
-Sie können dann zwischen einem {Befehls-Menüpunkt:ENNewCmdItem}
-und einem {Gruppen-Menüpunkt:ENNewGroupItem} wählen.
+Zum Einfügen eines neuen Menüpunktes in die aktive Gruppe wählen
+Sie diese Funktion.
+Sie können dann entscheiden, ob Sie einen neuen Programm-Menüpunkt
+oder eine neue Gruppe erstellen wollen.
 
-.topic ENNewCmdItem
-
-  ∙ Neuer Befehls-Menüpunkt ∙
-
-Mit diesem Befehl fügen Sie einen neuen {Befehls-Menüpunkt:CmdItem}
-in die aktive Gruppe ein. Mit einem Befehls-Menüpunkt
-lassen sich dann später Programme starten.
-
-Siehe auch:
-  {Neuer Gruppen-Menüpunkt:ENNewGroupItem}
-
-.topic ENNewGroupItem
-
-  ∙ Neuer Gruppen-Menüpunkt ∙
-
-Mit diesem Befehl fügen Sie einen neuen {Gruppen-Menüpunkt:GroupItem}
-in die aktive Gruppe ein und erstellen damit eine
-Untergruppe zu dieser. Dort lassen sich dann wieder weitere
-andere Menüpunkte einfügen.
-
-Siehe auch:
-  {Neuer Befehls-Menüpunkt:ENNewCmdItem}
+ Siehe auch:
+  {Programm-Menüpunkt|CmdItem}
+  {Gruppen|GroupItem}
 
 .topic EEditMainGroup
 
-  ∙ Hauptgruppe editieren ∙
+  ∙ Hauptgruppe ∙
 
-Um die Hauptgruppe zu Editieren, müssen Sie
-diese Funktion wählen.
-
-.topic EChangeOrder
-
-  ∙ Reihenfolge ändern ∙
-
-.topic EUserList
-
-  ∙ Die Benutzerliste ∙
+Um die Hauptgruppe zu Editieren, müssen Sie diese Funktion wählen.
+Die Dialogbox entspricht der einer Gruppe, nur daß die Hauptgruppe
+kein Paßwort haben kann.
 
 .topic OptionsMenu
 
- ▄ Das Optionen-Menü (Alt-O)
+ ▄ Das Optionen-Menü <Alt-O>
  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 In diesem Menü finden Sie Funktionen, die die Arbeitsweise
 von Power-Choice verändern können.
 
-  {System Optionen:OSysOptions}:
+  {System Optionen|OSysOptions}:
     Verschiedene Aspekte von Power-Choice
-    (Screensaver, Dateihandling) können
-    hiermit kontrolliert werden.
-  {Dos Optionen:ODosOptions}
+    können hiermit kontrolliert werden.
+  {Dos Optionen|ODosOptions}
     Bestimmen Sie den Dos-Prompt,
     Sceensaver und Uhr, etc.
-  {Farbanpassung:OColors}
-    Mit dieser Funktionen lassen sich
-    alle Power-Choice Farben verändern.
-  {Passwort ändern:OChangePassword}
+  {Paßwort ändern|OChangePassword}
 
 .topic OSysOptions
 
-  ▌ System-Optionen
+  ▌ System Optionen
+
+Mit dieser Funktion können Sie verschiedene Einstellungen, die das
+System als Ganzes betreffen, einstellen.
 
 .topic ODosOptions
 
   ▌ Dos Optionen
 
-.topic OColors
-
-  ▌ Farbanpassung
+Mit dieser Funktion bestimmen Sie die verschiedenen Einstellungen, die
+das Ausführen von DOS Kommandos beeinflussen.
 
 .topic OChangePassword
 
-  ▌ Passwort ändern
+  ▌ Paßwort ändern
+
+Hiermit können Sie das systemweite Paßwort verändern. Sie müssen dieses
+Paßwort beim Starten des Computers eingeben und zur Deaktivierung des
+Screen-Savers.
+
+ Siehe auch:
+  {Das Paßwort|Password}
 
 .topic ToolsMenu
 
- ▄ Das Tools-Menü (Alt-T)
+ ▄ Das Tools-Menü <Alt-T>
  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 Dieses Menü stellt verschiedene Sonderfunktionen von
 Power-Choice zur Verfügung.
@@ -168,40 +151,59 @@ Power-Choice zur Verfügung.
 
   ▌ Die Dos Shell
 
+Hiermit öffnen Sie das {Dos Shell-Fenster|DosShell}.
+
 .topic TChangeDir
 
   ▌ Verzeichnis wechseln
+
+Diese Funktion gestattet das bequeme wechseln des aktuellen
+Unterverzeichnisses.
 
 .topic TCalculator
 
   ▌ Der Taschenrechner
 
+Ein kleiner Taschenrechner.
+
 .topic TAscii
 
   ▌ Die ASCII-Tabelle
+
+Eine ASCII-Tabelle mit allen Sonderzeichen des PC's.
 
 .topic TCleanDisk
 
   ▌ Festplatte(n) reinigen
 
+Diese Funktion gestattet es Ihnen die Festplatte von bestimmten Dateien
+zu befreien. Sie geben an, welche Art von Dateien gelöscht werden sollen,
+z.B. alle *.BAK Dateien, und Power-Choice erledigt den Rest.
+
+.topic TTetris
+
+  ▌ Tetris Spiel
+
+Dieses kleine Tetris Spiel dient nur zum Zeitvertreib.
+
 .topic WindowMenu
 
- ▄ Das Fenster-Menü (Alt-F)
+ ▄ Das Fenster-Menü <Alt-F>
  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 Dieses Menü stellt Funktionen zur Verfügung, die auf
 das aktive Fenster angewandt werden können:
 
-  ■ {Vorheriges/Nächstes:WNextPrev}
+  ■ {Vorheriges/Nächstes|WNextPrev}
     Wechsel zwischen geöffneten Fenstern
-  ■ {Schließen:WClose}
+  ■ {Schließen|WClose}
     Schließt das aktive Fenster
-  ■ {Bewegen/Größe:WResize}
+  ■ {Bewegen/Größe|WResize}
     Verändern Sie die Position mit den
     Cursortasten oder die Größe mit
     <Shift>+Cursortasten. Diese Funktion ist
     nicht auf alle Fenster anwendbar.
-  ■ {Zoom:WZoom}
+  ■ {Zoom|WZoom}
     Stellt das aktive Fenster in maximaler
     Größe dar bzw. stellt ursprüngliche Größe
     wieder her.
@@ -228,304 +230,504 @@ Bewegen Sie das Fenster mit den Cusortasten oder betätigen Sie
 Shift und einer der Cursortasten, um die Größe des Fensters
 zu verändern.
 
-.topic WZoom, MenuEnd
+.topic WZoom,MenuEnd
 
   ▌ Fenster Zoom
 
 Das aktive Fenster wird so auf seine maximalen Ausdehnungen hin
 vergrößert oder wieder auf die Ausgangsgröße verkleinert. (Unzoom)
 
-.topic DlgStart, CmdEditDialog
+.topic DlgStart,CmdEditDialog
 
-  Die Befehls-Editier Dialogbox
- ───────────────────────────────
-Diese Dialogbox bietet Ihnen die Möglichkeit,
-einen {Befehls-Menüpunkt:CmdItem} zu editieren.
-Folgende Felder können ausgefüllt werden:
+  Die Programm-Menüpunkt Dialogbox
+ ──────────────────────────────────
+Mit dieser Dialogbox können sie einen {Programm-Menüpunkt|CmdItem}
+editieren.
+Folgende Felder müssen ausgefüllt werden:
 
-  {Name:NameField}
-  {Passwort:PasswordField}
-  {Beschränkter Zugriff:Accessfield}
-  {PCH Instrucktionen:PchInstructions}
-  {Dos Startverzeichnis:DosDirectory}
-  {Dos Befehle:DosCommands}
-  {Optionen:Optionsfield}
-  {Zugriffskontrolle:Accesscontrol}
+  {Name|NameField}
+  {Paßwort|PasswordField}
+  {Hilfetext|HelpText}
+  {Startverzeichnis|DosDirectory}
+  {Befehle|DosCommands}
+  {Speicher|Memory}
+  {Optionen|Optionsfield}
 
-Alle Felder bis auf das Namensfeld sind optional.
-Zum Löschen des Menüpunktes können Sie die
-{Lösch-Taste:Deletebutton} betätigen.
+Alle Felder bis auf das Namensfeld sind optional. Zum Löschen des
+Menüpunktes können Sie die {Lösch-Taste|Deletebutton} betätigen.
 
 .topic GroupEditDialog
 
-  Die Gruppen-Editier Dialogbox
- ───────────────────────────────
-Diese Dialogbox bietet Ihnen die Möglichkeit,
-einen {Gruppen-Menüpunkt:GroupItem} zu editieren.
-Folgende Felder können ausgefüllt werden:
+  Die Gruppen-Menüpunkt Dialogbox
+ ─────────────────────────────────
+Mit dieser Dialogbox können sie eine {Gruppe|GroupItem} editieren.
+Folgende Felder müssen ausgefüllt werden:
 
-  {Name:NameField}
-  {Spalten:ColField}
-  {Passwort:PasswordField}
-  {Kein Zugriff:AccessField}
+  {Name|NameField}
+  {Spalten|ColField}
+  {Passwort|PasswordField}
 
-Wollen Sie in die Gruppe verzweigen, dann drücken
-Sie die {Wechsel-Taste:SwitchGroupButton}.
-Zum Löschen des Menüpunktes können Sie die
-{Lösch-Taste:Deletebutton} betätigen.
+Wollen Sie in die Gruppe verzweigen, um deren Inhalt zu editieren,
+dann drücken Sie die {Wechsel-Taste|SwitchGroupButton}.
+Zum Löschen des Menüpunktes können Sie die {Lösch-Taste|Deletebutton}
+betätigen.
 
 .topic NameField
 
-  ▌Eingabefeld Name
+  ▌ Eingabefeld Name
 
-Geben Sie in dem Feld "Name" des Editierdialogs
-den gewünschten Namen des Menüpunktes an.
-Um dem Menüpunkt einen Shortcut zu geben, muß
-der gewünschte Buchstabe in zwei ~-Zeichen
-eingeschlossen sein.
+Geben Sie in das Feld Name den Namen des Menüpunktes ein.
 
-Beispiel:  
-Der Menüpunkt "Textverarbeitung" soll mit der
-Taste "T" angewählt werden können. Dazu geben
-Sie in dem Namenfeld folgendes an:
-  ~T~extverarbeitung
-  
+Menüpunkte können auch durch einen sog. "Shortcut", d.h. durch eine
+vorgegebene Tastenkombination ausgewählt werden. Diese besteht immer
+aus <Strg> und einer weiteren Taste. Die weitere Taste wird bestimmt
+durch den Buchstaben, der einer Tilde (~) im Eingabefeld Name folgt.
+Geben Sie z.B. in das Feld Name "MS ~Word" ein, dann läßt sich Word
+mit <Strg-W> starten.
+
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
+  {Gruppen-Menüpunkt Dialogbox|GroupEditDialog}
+
 .topic PasswordField
 
-  ▌Eingabefeld Passwort
+  ▌ Eingabefeld Paßwort
 
-Wenn Sie in dieses Feld ein Passwort eingeben,
-muß es vor jedem Start der Anwendung eingegeben
-werden. Bei einem Fehlversuch wird der Anwender
-darauf hingewiesen und muß den Vorgang wiederholen.
+Wenn Sie in dieses Feld ein Paßwort eingeben, muß es vor jedem Start
+der Anwendung bzw. beim Öffnen der Gruppe eingegeben werden. Bei
+einem Fehlversuch wird der Anwender darauf hingewiesen und muß den
+Vorgang wiederholen.
 
-.topic AccessField
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
+  {Gruppen-Menüpunkt Dialogbox|GroupEditDialog}
 
-  ▌Eingabefeld Beschränkter Zugriff
+.topic HelpText
 
-In diesem Eingabefeld sind die Namen jener Benutzer
-des Systems zu nennen, die mit dieser Anwendung
-nicht oder nur eingeschränkt arbeiten dürfen.
-Trägt man hier beispielsweise "Mister X" ein, dann
-kann Mister X diese Anwendung bzw. diese Gruppe
-nicht benutzen.
-Handelt es sich bei dem Menüpunkt um eine Anwendung,
-dann kann mit dem Schalter {Zugriffskontrolle:Accesscontrol}
-bestimmt werden, ob die genannten Benutzer die
-Anwendung gar nicht oder nur eingeschränkt, 
-mit abgesperrter Tastatur, benutzen dürfen.
+  ▌ Hilfetext
 
-.topic Accesscontrol, Accesscontrol1
+Hier können Sie einen beliebigen Text eingeben, der immer in der
+Statuszeile erscheint, wenn dieser Programm-Menüpunkt angewählt
+ist.
 
-  ▌Eingabefeld Zugriffskontrolle
-
-Steht dieser Schalter auf "Vollständig sperren",
-dann dürfen die im Feld {Beschränkter Zugriff:AccessField}
-genannten Benutzer die Anwendung überhaupt nicht
-starten, bei der Stellung "Nur Tastatur sperren" wird
-die Anwendung zwar gestartet, jedoch ist die Tastatur
-dann blockiert.
-Diese Einstellung empfiehlt sich besonders bei Batch-Dateien,
-die eine bestimmte Aufgabe erledigen, bei der keine Eingaben
-gefordert sind.
-
-.topic PchInstructions
-
-  ▌Eingabefeld PCH Instruktionen
- 
-In diesem Feld können Sie mit der Makro-Sprache von
-Power-Choice "programmieren".
-
-Diese Sprache dient folgendem Zwecke:
-  ■ Sie können mit ihr Variableninhalte 
-    setzen, die später in die DOS-Befehle
-    eingesetzt werden können und somit
-    die Ausführung beeinflussen
-  ■ Sie können anhand von Power-Choice
-    Befehlen verschiedene Aufgaben wie
-    Eingabefenster öffnen oder Editor-
-    fenster öffnen erledigen
-  ■ Bedingte Ausführungen sind auch
-    begrenzt möglich  
-    
-Die einzelnen Befehle sind, wie bei den DOS-Befehlen
-mit Semikolons zu trennen und werden im Kapitel
-{Power-Choice Makro-Sprache:PCHLanguage} behandelt.
-Mehr über Variablen unter {Power-Choice Variablen:PCHVariables}.
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
 
 .topic DosDirectory
 
-  ▌Eingabefeld Startverzeichnis
+  ▌ Eingabefeld Startverzeichnis
   
-Hier ist das Verzeichnis anzugeben, in dem die
-Ausführung zu starten ist. Vorzugsweise kann man
-hier den Pfad angeben, in dem die Anwendung
-installiert ist, oder aber das Feld frei lassen
-und somit im aktuellen Verzeichnis verbleiben.
+Hier ist das Verzeichnis anzugeben, in dem die Ausführung zu starten
+ist. Vorzugsweise kann man hier den Pfad angeben, in dem die Anwendung
+installiert ist, oder aber das Feld frei lassen und somit im aktuellen
+Verzeichnis verbleiben.
+
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
 
 .topic DosCommands
 
-  ▌Eingabefeld Dos-Befehle
-  
-In diesem Feld müssen die Dos-Befehle angegeben
-werden, die sonst auf der Kommandozeile eingegeben
-wurden. Mehrere Befehle können mit einem Semikolon
-getrennt werden.
-Hinweis: Im Vergleich zur Kommandozeile ist Power-Choice
-um einiges flexibler. Zusätzlich zu den Dos Befehlen
-können Sie auch Power-Choice Variablen verwenden,
-die Sie im Feld {PCH Instrucktionen:PchInstructions} definiert
-haben. 
-Mehr über Variablen im Kapitel {Power-Choice Variablen:PCHVariables}
+  ▌ Eingabefeld Befehle
 
-.topic Optionsfield
+In diesem Feld müssen die Dos-Befehle angegeben werden, die sonst auf
+der Kommandozeile eingegeben wurden.
 
-  ▌Optionen
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
+
+.topic Optionsfield,OptionsField1,OptionsField2,OptionsField3
+
+  ▌ Optionen
 
 Folgende Optionen lassen sich einstellen:
 
-   {[ ] Uhr:Optionsfield1}
-   {[ ] Bildschirm Schoner:OptionsField2}
-   {[ ] Auf Tastendruck warten:Optionsfield3}
-   {[ ] Pfad sichern:Optionsfield4}
+   [ ] Uhr
+     Hiermit bestimmen Sie, ob während
+     der Ausführung in der rechten
+     oberen Ecke des Bildschirms eine
+     {Uhr|HelpOnClock} sichtbar sein soll.
 
-.topic Optionsfield1
+   [ ] Bildschirm Schoner
+     Kreuzen Sie diese Option an, wenn
+     der Power-Choice {Bildschirm Schoner|HelpOnScreenSaver}
+     während der Anwendung aktiv sein
+     soll.
 
-  ▌Optionen
+   [ ] Auf Tastendruck warten
+     Wählen Sie diese Option, so wird
+     Power-Choice auf einen Tasten-
+     druck warten, bevor es den Bild-
+     schrim löscht und wieder erscheint.
 
- [ ] Uhr
+   [ ] Pfad sichern
+     Mit dieser Option legen sie fest, ob
+     Power-Choice den momentanen Pfad
+     sichern und nach Beendigung des
+     Programms wieder aktivieren soll.
 
-   Hiermit bestimmen Sie, ob während
-   der Ausführung in der rechten
-   oberen Ecke des Bildschirms eine
-   Uhr sichtbar sein soll.
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
 
- Querverweis:
-   {[ ] Bildschrim Schoner:Optionsfield2}
-   {[ ] Auf Tastendruck warten:Optionsfield3}
-   {[ ] Pfad sichern:Optionsfield4}
+.topic Memory
 
-.topic Optionsfield2
+  ▌ Speicher
 
-  ▌Optionen
+Geben Sie hier an, wieviel Speicher ihr Programm benötigt. Power-Choice
+entscheidet dann, ob es sich beim Ausführen aus dem Speicher entfernen
+muß, um für freien Speicher zu sorgen (kostet etwas Zeit) oder ob es im
+Speicher verbleiben kann (geht sehr schnell).
 
- [ ] Bildschrim Schoner
+Wenn Sie nicht wissen wieviel Speicher ein Programm braucht, oder falls
+Sie sicher sind, daß ein Programm viel Speicher braucht, geben Sie hier
+0 an. Eine Eintragung von 0 KBytes bewirkt, daß Power-Choice IMMER so viel
+Speicher wie möglich frei macht.
 
-   Kreuzen Sie diese Option an, wenn
-   der eingebaute Bildschirm Schoner
-   während der Anwendung aktiv sein
-   soll.
-
- Querverweis:
-   {[ ] Uhr:Optionsfield1}
-   {[ ] Auf Tastendruck warten:Optionsfield3}
-   {[ ] Pfad sichern:Optionsfield4}
-
-.topic Optionsfield3
-
-  ▌Optionen
-
- [ ] Auf Tastendruck warten
-
-   Wählen Sie diese Option, so wird
-   Power-Choice auf einen Tasten-
-   druck warten, bevor es den Bild-
-   schrim löscht und wieder erscheint.
-
- Querverweis:
-   {[ ] Uhr:Optionsfield1}
-   {[ ] Bildschrim Schoner:Optionsfield2}
-   {[ ] Pfad sichern:Optionsfield4}
-
-.topic Optionsfield4
-
-  ▌Optionen
-
- [ ] Pfad sichern
-
-   Mit dieser Option legen sie fest, ob
-   Power-Choice den momentanen Pfad
-   sichern und nach Beendigung des
-   Programms wieder aktivieren soll.
-
-  Querverweis:
-    {[ ] Uhr:Optionsfield1}
-    {[ ] Bildschirm Schoner:Optionsfield2}
-    {[ ] Auf Tastendruck warten:Optionsfield3}
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
 
 .topic DeleteButton
 
-  ▌Lösch-Taste
+  ▌ Lösch-Taste
 
-Wenn Sie diese Funktion auslösen, wird der aktuelle
-Menüpunkt nach Bestätigung gelöscht.
-Bei versehntlichem Löschen sollten Sie den Editmodus
-verlassen und die Änderungen nicht sichern.
+Wenn Sie diese Taste drücken, wird der aktuelle Programm-Menüpunkt
+bzw. Gruppe nach Bestätigung gelöscht. Bei versehentlichem Löschen
+sollten Sie den {Editmodus|Editmode} verlassen und die Änderungen
+NICHT sichern.
+
+ Siehe auch:
+  {Programm-Menüpunkt Dialogbox|CmdEditDialog}
+  {Gruppen-Menüpunkt Dialogbox|GroupEditDialog}
 
 .topic ColField
 
-  ▌Eingabefeld Spalten
+  ▌ Eingabefeld Spalten
 
 Geben Sie die Anzahl der darzustellenden Spalten (max. 3)
 dieser Gruppe an.
 
-.topic SwitchGroupButton, DlgEnd
+ Siehe auch:
+  {Gruppen-Menüpunkt Dialogbox|GroupEditDialog}
 
-  ▌Wechsel-Taste
+.topic SwitchGroupButton
 
-Diese Taste ermöglicht das Wechseln zur Gruppe im {Editmodus:Editmode}.
-Sie ist beim Erstellen einer neuen Gruppe gesperrt.
+  ▌ Wechsel-Taste
+
+Wenn Sie diese Taste drücken, wird die zugehörige Gruppe geöffnet.
+Dadurch können Sie den Inhalt dieser Gruppe verändern.
+
+ Siehe auch:
+  {Gruppen-Menüpunkt Dialogbox|GroupEditDialog}
+
+.topic DosOptionsDialog
+
+   Der Dos-Optionen Dialog
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+Die Einstellungen in diesem Dialog betreffen das Ausführen von Dos
+Kommandos. Folgende Optionen stehen zur Verfügung:
+
+ {Dos Shell|DosShellOptField}
+ {Dos Shell Prompt|DosShellPrptField}
+ {Dos Einstellungen|DosOptField}
+
+.topic DosShellOptField,DosShellOptField1
+
+  ▌ Dos Shell
+
+Folgende Optionen stehen zur Auswahl:
+
+  [ ] Quick Run
+    Mit dieser Option können Sie
+    bestimmen, ob die Dos Shell
+    Dos Befehle im Quick-Run Modus
+    ausführt oder nicht.
+
+  [ ] Auto ChangeDir
+    Diese Funktion von Power-Choice
+    ermöglicht das schnelle Wechseln
+    zwischen Unterverzeichnissen.
+
+ Siehe auch:
+  {Dos Optionen Dialogbox|DosOptionsDialog}
+
+.topic DosShellPrptField
+
+  ▌ Dos Shell Prompt
+
+In dieses Eingabefeld können Sie eingeben, wie das Prompt
+(Eingabeaufforderung) in der Dos Shell aussehen soll. Dabei steht
+%s für das aktuelle Verzeichnis.
+
+ Beispiele:
+  %s> entspricht z.B. C:\>
+  %s=> entspricht Hallo C:\=>
+
+ Siehe auch:
+  {Dos Optionen Dialogbox|DosOptionsDialog}
+
+.topic DosOptField,DosOptField1,DosOptField2,DosOptField3
+
+  ▌ Dos Einstellungen
+
+Diese Einstellungen bestimmen, welche Power-Choice Funktionen (Uhr, Bildschrim
+Schoner, etc.) außerhalb von Power-Choice aktiv sind. Wollen Sie z.B. immer
+die Uhr in der rechten oberen Ecke sehen, dann wählen Sie "Uhr einblenden".
+Wenn Sie dann Power-Choice beenden, bleibt die Uhr eingestellt.
+Folgende Optionen stehen zur Auswahl:
+
+ [ ] Uhr einblenden
+   Wählen Sie diese Option, wenn
+   Sie die {Uhr|HelpOnClock} in der oberen rechten
+   Ecke sehen wollen.
+
+ [ ] Bildschirm Schoner
+   Wählen Sie diese Option, wenn
+   Sie wollen, daß der
+   {Bildschirm Schoner|HelpOnScreenSaver}
+   aktiv sein soll.
+
+ [ ] Nach C:\ wechseln
+   Wenn Sie diese Option wählen,
+   wechselt Power-Choice beim
+   Verlassen desselben immer ins
+   Hauptverzeichnis von Laufwerk C:
+
+ [ ] Auf Tastendruck warten
+   Diese Option bestimmt, ob
+   Power-Choice Sie zum Drücken
+   einer Taste auffordern soll,
+   bevor es wieder erscheint.
+
+ Siehe auch:
+  {Dos Optionen Dialogbox|DosOptionsDialog}
+
+.topic SysOptionsDialog
+
+   Der System Optionen Dialog
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+Die Einstellungen in diesem Dialog betreffen die Anzeige und eine
+Option für die Tastaturbelegung im Menü.
+
+  {Anzeigezeilen|DisplayLinesField}
+  {Menü|MenuField}
+
+.topic DisplayLinesField,DisplayLinesField1
+
+  ▌ Anzeigezeilen
+
+Stellen Sie hier ein, ob Sie Power-Choice im 25 Zeilen Modus oder
+(bei EGA) im 43 bzw. (bei VGA) im 50 Zeilen Modus sehen wollen.
+
+.topic MenuField
+
+  ▌ Menü
+
+ [ ] <Tab> schließt Gruppe
+
+Die <Tab> Taste bewirkt im Menü das Zurückspringen zur nächst tieferen
+Gruppe. Wählen Sie diese Option, so schließt Power-Choice das Fenster
+gleichzeitig (was zur Folge hat, das beim nächsten Öffnen evtl. ein Paßwort
+erneut eingegeben werden muß). Anderenfalls bleibt das Fenster im Hintergrund
+geöffnet.
+
+.topic HDCleanDialog
+
+   Festplatte-Aufräumen Dialog
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+
+Folgende Felder sind auszufüllen:
+
+ Laufwerke:
+  Geben Sie hier alle Laufwerke an,
+  die abgesucht werden sollen, z.B.
+  "C: D: F:"
+
+ Zu löschende Dateien:
+  Hier können mehrere Dateispezifikationen
+  angegeben werden. Wenn Sie z.B. alle
+  BAK-Dateien löschen wollen, geben Sie
+  *.BAK ein.
+
+ Optionen:
+  [ ] Löschen bestätigen
+    fragt vor dem Löschen nach
+  [ ] Statistik zeigen
+    zeigt eine Statistik über
+    gelöschte Dateien und gewonnenen
+    Speicherplatz.
+
+.topic Password,DlgEnd
+
+  * Das Paßwort *
+
+Bei der Auswahl eines geeigneten Paßwortes sollten Sie folgendes beachten:
+
+Da bei der ersten Abfrage des Paßwortes beim Systemstart noch keine
+länderspezifischen Tastaturtreiber installiert sind, sollten Sie auf Umlaute
+und Sonderzeichen verzichten. Die richtige Handhabung von Y und Z ist dagegen
+gesichert. Diese Buchstaben können Sie also bedenkenlos verwenden.
+
+Beachten Sie bitte auch, daß die Groß- und Kleinschreibung von Zeichen zu
+beachten ist.
+
+.topic EditModeActive
+
+   Power-Choice Version 3.1 ▄
+ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+Sie befinden sich momentan im {Editiermodus|EditMode}. In diesem Modus
+können Sie die Menüpunkte nur editieren und nicht starten. Dies wird unter
+anderem durch die andere Farbpalette dargestellt.
+
+Mit <F2> können Sie den Editmodus ein- und ausschalten.
 
 .topic EditMode
 
- ▌Der Editiermodus▐
+ ▌ Der Editiermodus ▐
 
-Zum Anpassen der Menüstruktur und zum
-Hinzufügen oder Löschen von Programmen,
-die zur Auswahl stehen bzw. stehen sollen.
-Wenn Sie im Editmodus einen Menüpunkt
-anwählen, wird dieser nicht ausgeführt,
-sondern in einem Dialogfenster zum Editieren
-dargestellt. Es handelt sich, je nach Art
-des Menüpunkts, um eine {Befehls-Editiermaske:CmdEditDialog}
-oder um eine {Gruppen-Editiermaske:GroupEditDialog}.
+Zum Anpassen der Menüstruktur und zum Hinzufügen oder Löschen von
+Programmen und Gruppen müssen Sie in den Editmodus wechseln. Dies
+ist mit <F2> oder über die Menüleiste möglich.
+
+Wenn Sie im Editmodus einen Menüpunkt anwählen, wird dieser nicht
+ausgeführt, sondern in einem Dialogfenster zum Editieren dargestellt. 
 
 .topic CmdItem
 
- Befehls-Menüpunkte ▄
-  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-Unter Befehls-Menüpunkten versteht man Menüpunkte,
-die ein Dos-Programm starten, wenn sie gewählt werden.
+   Programm-Menüpunkte ▄
+  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+Unter Programm-Menüpunkten versteht man Menüpunkte, die ein
+Dos-Programm starten, wenn sie ausgewählt werden.
 
  Siehe auch:
-   {Die Befehls-Editier Dialogbox:CmdEditDialog}
-   {Gruppen-Menüpunkte:GroupItem}
+  {Gruppen|GroupItem}
 
 .topic GroupItem
 
- Gruppen-Menüpunkte ▄
-  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-Gruppen-Menüpunkte stehen für eine gesamte
-Gruppe von Menüpunkte, die unter einem Namen
-zusammengefasst wurden. Wenn Sie einen Gruppen-
-Menüpunkt wählen, so wird die entsprechende
-Gruppe in einem weiteren Fenster dargestellt.
-Sie können dann weiter aus dieser Gruppe
-wählen oder durch schließen des Fensters
-(Alt-F3) zu der vorherigen Gruppe zurückkehren.
+   Gruppen ▄
+  ▀▀▀▀▀▀▀▀▀▀
+In Gruppen lassen sich mehrere Programm-Menüpunkte unter einem
+Oberbegriff zusammenfassen. Eine Gruppe kann in mehreren Spalten
+angezeigt werden.
+
+Um von einer Gruppe in die Vorgängergruppe zu wechseln, können Sie
+<Tab> drücken, oder mit der Maus die andere Gruppe wieder anwählen.
 
  Siehe auch:
-   {Die Gruppen-Editier Dialogbox:GroupEditDialog}
-   {Befehls-Menüpunkte:CmdItem}
-
-.topic Help
-
- Hilfe über Hilfe
-
-.topic OrderingMode
-
-  ∙ Reihenfolge ändern ∙
+  {Programm-Menüpunkte|CmdItem}
 
 .topic DosShell
 
   ▌ Dos Shell
+
+Dieses Fenster ermöglicht das Ausführen von DOS Kommandos, ohne
+Power-Choice beenden zu müssen. Sie sehen in dem Fenster ein
+DOS-Prompt, genau wie außerhalb von Power-Choice.
+Geben Sie die Befehle ein, wie Sie es gewohnt sind.
+
+In der linken unteren Ecke wird angezeigt, wieviel Speicher beim
+Ausführen zur Verfügung steht. Jenachdem ob Sie {Quick-Run|QuickRun}
+(QR) gewählt haben oder nicht zwischen 400 und 620 KB.
+
+Um QR ein bzw. auszuschalten können Sie mit der Maus auf die
+Speicheranzeige drücken oder die <Tab> Taste drücken.
+
+.topic HelpOnEditing
+
+  ▌ Editieren des Menüs
+
+Um Änderungen am Menü durchzuführen, wechseln Sie mit <F2> oder über
+die Menüleiste mit "Bearbeiten|Editmodus" zum {Editmodus|Editmode}.
+
+Sie werden bemerken, daß sich die Farben der Menüknöpfe ändern.
+
+Wenn Sie nun eine Auswahl treffen, wird das betreffende Programm nicht
+gestartet bzw. die Gruppe geöffnet, sondern es wird ein Dialogbox
+erscheinen, in der Sie die Einstellungen ändern können.
+
+Neue Menüpunkte fügen Sie mit dem Befehl "Bearbeiten|Neuer Menüpunkt"
+bzw. mit <F3> hinzu.
+
+Die Hauptgruppe läßt sich auch bearbeiten, benutzen Sie dazu den Befehl
+"Bearbeiten|Hauptgruppe" oder <Strg-F3>.
+
+.topic HelpOnDosCommands
+
+  ▌ Dos Befehle ausführen
+
+Generell gibt es zwei Möglichkeiten, DOS Befehle auszufüren:
+
+ 1. Die {Dos Shell|DosShell}
+ 2. Power-Choice verlassen <Alt-X>
+
+Wollen Sie für längere Zeit ohne Power-Choice arbeiten, dann können
+Sie es mit <Alt-X> verlassen und später wieder mit PCH starten.
+
+Um zwischendurch einige DOS Befehle auszuführen können Sie einfach
+ein Dos Shell Fenster öffnen <F4> und darin arbeiten.
+
+.topic QuickRun
+
+  ∙ Der Quick-Run Modus (QR) ∙
+
+Beim Ausführen von DOS Kommandos haben Sie die Wahl zwischen
+maximaler Speicherausnutzung oder schneller Ausführung (QR).
+
+Wählen Sie Quick-Run, dann werden die Befehle sehr schnell ausgeführt
+und Power-Choice erscheint sofort wieder.
+
+Anderenfalls wird von Power-Choice der gesamte verfügbare Speicher
+für DOS freigegeben. Dadurch bedingt muß Power-Choice nach der Ausführung
+der Kommandos neu geladen werden, was etwas mehr Zeit in Anspruch nimmt, als
+es beim Quick-Run Modus wäre.
+
+Anmerkung: Für einfache DOS Befehle wie COPY, DEL, REN oder DIR, etc, reicht
+der durch Quick-Run zur Verfügung gestellte Speicher voll aus. In der
+{Dos Shell|DosShell} empfiehlt es sich daher im Quick-Run Modus zu arbeiten.
+
+.topic HelpOnHelp
+
+  Hilfe über Hilfe
+ ------------------
+Das Hilfe-System von Power-Choice ist denkbar einfach. Da es kontext-sensitiv
+arbeitet, genügt ein Druck auf die <F1>-Taste, um weitere Informationen in
+der gegenwärtigen Situation zu bekommen.
+
+Innerhalb der Hilfe können weitere Themen mit der Maus (Doppelklick) oder
+mit der Tastatur (<Tab> und <Enter>) ausgewählt werden.
+
+Zum Beispiel hier:
+  {Zurück zum Inhaltsverzeichnis|MenuPage}
+
+.topic HelpOnScreenSaver
+
+ + Der Bildschirm Schoner +
+
+Der Power-Choice Bildschirm Schoner schaltet den Bildschirm nach 5 Minuten
+dunkel, falls in dieser Zeit keine Tastatureingaben stattfinden. Haben Sie
+ein Paßwort definiert, daß Sie beim Starten des Computers eingeben, dann
+müssen Sie zum reaktivieren des Bildschirms auch dieses Paßwort eingeben.
+Dabei ist lediglich das Paßwort (ohne Enter) einzugeben. Falls Sie sich
+vertippen, drücken Sie einmal <Esc> oder <Enter>. Dadurch wird der
+Eingabepuffer wieder vollständig geleert und Sie können das Paßwort erneut
+von vorne eingeben.
+
+Während der Bildschirm dunkel geschaltet ist, arbeitet der Computer weiter,
+er wird von dem Bildschirm Schoner nicht beeinflusst.
+
+ !! ACHTUNG !!
+Wenn Sie Microsoft Windows starten wollen, DARF der Bildschirm Schoner nicht
+aktiv sein. Legen Sie deshalb für Windows einen Programm-Menüpunkt an, bei dem
+Sie den Bildschirm Schoner deaktivieren.
+
+Anmerkung: Innerhalb von Power-Choice ist der Bildschirm Schoner immer aktiv.
+
+.topic HelpOnClock
+
+ + Die Uhr +
+
+Während Sie in Power-Choice arbeiten, sehen Sie in der oberen rechten Ecke
+immer eine Uhr. Falls Sie auch in allen anderen Programmen, die im Textmodus
+arbeiten, eine Uhr sehen wollen, so können Sie das einerseits per Option
+"Uhr einblenden" in der Programm-Menüpunkt Dialogbox eingeben. Es gibt aber
+auch immer die Möglichkeit, die Uhr manuell ein- bzw. auszuschalten. Dazu
+müssen Sie nur die linke <Strg> und <Alt> Taste zusammen mit der rechten
+<Shift> Taste drücken.

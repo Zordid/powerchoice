@@ -86,7 +86,7 @@ PROC init NEAR
          jmp exit
 ENDP init
 
-maxlen EQU 30
+maxlen EQU 15
 
 PROC askpwd NEAR
          pushm <ds, di>
@@ -137,7 +137,23 @@ getkey:  xor ax, ax
          je return
          cmp cx, maxlen
          je full
-         xor al, chiffre
+         cmp al, 'z'
+         je @@z
+         cmp al, 'Z'
+         je @@Z_
+         cmp al, 'y'
+         je @@y
+         cmp al, 'Y'
+         je @@Y_
+         jmp @@ok
+@@z:     mov al, 'y'
+         jmp @@ok
+@@Z_:    mov al, 'Y'
+         jmp @@ok
+@@y:     mov al, 'z'
+         jmp @@ok
+@@Y_:    mov al, 'Z'
+@@ok:    xor al, chiffre
          mov [bx], al
          inc bx
          inc cx
