@@ -1,7 +1,9 @@
-{$X+}
+{$A-,B-,D-,E-,F-,G+,I-,L-,N-,O-,R-,S-,V-,X+}
+{$M 16384,0,65536}
 Program PchRez;
-Uses Objects, Drivers, Views, Dialogs, Menus, Fields, ColorSel, Editors, App,
-     PchCmds, PchMsg, PchHelp, PchPW, HintStat, Editor, StrObj, PchTetris, PchOpt;
+Uses
+  Objects, Drivers, Views, Dialogs, Menus, Fields, ColorSel, App,
+  PchCmds, PchMsg, PchHelp, PchOpt, HintStat, Editor;
 
 Var
   Rez: TResourceFile;
@@ -72,6 +74,7 @@ Begin
   Dispose(StatusLine, Done);
 End;
 
+(*
 Procedure CreateHints;
 Var Hints: TStrListMaker;
 Begin
@@ -135,6 +138,7 @@ Begin
   Rez.Put(@Hints, 'Hints');
   Hints.Done;
 End;
+*)
 
 Procedure CreateMenuBar1;
 Var MenuBar: PMenuBar;
@@ -153,10 +157,13 @@ Begin
       NewLine(
       NewItem('~N~euen Menüpunkt hinzufügen...', '', kbNoKey, cmNewMenuItem, hcENewItem,
       NewItem('~H~aupt-Gruppe editieren', 'Ctrl-F2', kbCtrlF2, cmEditMainGroup, hcEEditMainGroup,
+      {
       NewItem('~R~eihenfolge ändern', 'Alt-F2', kbAltF2, cmChangeOrder, hcEChangeOrder,
       NewLine(
       NewItem('~B~enutzerliste', '', kbNoKey, cmUserList, hcEUserList,
       nil)))))))),
+      }
+      nil))))),
     NewSubMenu('~O~ptionen', hcOptionsMenu, NewMenu(
       NewItem('~S~ystem Optionen', '', kbNoKey, cmSysOptions, hcOSysOptions,
       NewItem('~D~os/Dos Shell Optionen', '', kbNoKey, cmDosOptions, hcODosOptions,
@@ -186,6 +193,7 @@ Begin
   Dispose(MenuBar, Done);
 End;
 
+(*
 Procedure CreateMenuBar2;
 Var MenuBar: PMenuBar;
 Begin
@@ -225,6 +233,7 @@ Begin
   Rez.Put(MenuBar, 'UserMenuBar');
   Dispose(MenuBar, Done);
 End;
+*)
 
 Procedure CreateCmdEditDialog;
 Begin
@@ -278,13 +287,13 @@ Begin
     Labl := New(PLabel, Init(R, '~O~ptionen', Control));
     Dlg^.Insert(Labl);
   R.Assign(57,13,67,14);
-  Control := New(PIntInputLine, Init(R, 10, 0, 640));
+  Control := New(PNumInputLine, Init(R, 10, 0, 640));
   Dlg^.Insert(Control);
     R.Assign(35,13,50,14);
     Labl := New(PLabel, Init(R, 'Hauptspeicher:', Control));
     Dlg^.Insert(Labl);
   R.Assign(57,14,67,15);
-  Control := New(PIntInputLine, Init(R, 10, 0, MaxInt));
+  Control := New(PNumInputLine, Init(R, 10, 0, MaxInt));
   Dlg^.Insert(Control);
     R.Assign(35,14,57,15);
     Labl := New(PLabel, Init(R, 'Erweiterungsspeicher:', Control));
@@ -325,7 +334,7 @@ Begin
     Dlg^.Insert(Labl);
 
   R.Assign(26,3,35,4);
-  Control := New(PIntInputLine, Init(R, 2, 1, 3));
+  Control := New(PNumInputLine, Init(R, 2, 1, 3));
   Control^.HelpCtx := hcColField;
   Dlg^.Insert(Control);
 
@@ -342,6 +351,7 @@ Begin
     Labl := New(PLabel, Init(R, '~P~asswort', Control));
     Dlg^.Insert(Labl);
 
+  (*
   R.Assign(17,6,35,7);
   Control := New(PInputLine, Init(R, 80));
   Control^.HelpCtx := hcAccessfield;
@@ -350,6 +360,7 @@ Begin
     R.Assign(17,5,30,6);
     Labl := New(PLabel, Init(R, 'Kein ~Z~ugriff', Control));
     Dlg^.Insert(Labl);
+  *)
 
   R.Assign(36,2,50,4);
   Control := New(PButton, Init(R, '~W~echseln', cmNo, bfNormal));
@@ -397,7 +408,7 @@ Begin
     Dlg^.Insert(Labl);
 
   R.Assign(26,3,34,4);
-  Control := New(PIntInputLine, Init(R, 2, 1, 3));
+  Control := New(PNumInputLine, Init(R, 2, 1, 3));
   Control^.HelpCtx := hcColField;
   Dlg^.Insert(Control);
 
@@ -507,6 +518,7 @@ Begin
   Dispose(Dlg, Done);
 End;
 
+(*
 Procedure CreateLockedDialog;
 Begin
   Writeln('Adding LockedDialog...');
@@ -523,6 +535,7 @@ Begin
   Rez.Put(Dlg, 'LockedDialog');
   Dispose(Dlg, Done);
 End;
+*)
 
 Procedure CreateCleanDialog;
 Begin
@@ -631,7 +644,7 @@ Begin
   CreateCmdEditDialog;
   CreateGroupEditDialog;
   CreateMainGroupEditDialog;
-  CreateLockedDialog;
+  (* CreateLockedDialog; *)
   CreateCleanDialog;
   CreateCleanAskDialog;
   CreateSysOptionsDialog;
@@ -647,7 +660,6 @@ Begin
   RegisterFields;
   RegisterColorSel;
   RegisterEditor;
-  RegisterType(RStr);
   RegisterType(RStrListMaker);
   RegisterType(RClickTester);
   RegisterType(RSysDialog);
@@ -661,8 +673,8 @@ Begin
   Rez.Init(Strm);
   CreateStatusLine;
   CreateMenuBar1;
-  CreateMenuBar2;
-  CreateHints;
+  (* CreateMenuBar2; *)
+  (* CreateHints; *)
   CreateDialogs;
   Rez.Done;
 End.

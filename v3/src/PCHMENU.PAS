@@ -134,7 +134,7 @@ Implementation
   Uses
     StrUtl,
     MsgBox, App, HintStat,
-    PchGlb, PchOpt, PchMsg, PchCmds, PchHelp, PchPW, PchRun, PchDos, PchMacro;
+    PchGlb, PchOpt, PchMsg, PchCmds, PchHelp, PchPW, PchRun, PchDos;
 
   Function EditMenuItem(M: PMenuItem): Word;
   Var
@@ -358,7 +358,7 @@ Implementation
               Exit;
             End;
           End;
-          If (PchCmds^.Empty) Or (PchExec(PchCmds, DosCmds)) Then
+          If (PchCmds^.Empty) Or True {(PchExec(PchCmds, DosCmds))} Then
           Begin
             ClearPrompt;
             RememberOldPath(Options And miSavePath<>0);
@@ -497,7 +497,7 @@ Implementation
       N: String[22]; {KeyInputline}
       C: LongInt;  {NumInputline}
       P: String[10]; {Inputline}
-      R: String[80]; {Inputline}
+      (* R: String[80]; {Inputline} *)
     End;
   Var
     OldPage: PGroupWindow;
@@ -516,7 +516,6 @@ Implementation
           StrMove(N, GetName);
           StrMove(P, Password.GetStr);
           C:=Cols;
-          R:='';
         End;
         Dlg^.SetData(Data);
         Cmd:=DeskTop^.ExecView(Dlg);

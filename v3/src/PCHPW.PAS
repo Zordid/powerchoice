@@ -51,7 +51,7 @@ Implementation
   Type
     TPasswords= Array[0..MaxUsers] Of String[20];
     PPWInputLine= ^TPWInputLine;
-    TPWInputLine= Object(TKeyInputLine)
+    TPWInputLine= Object(TInputLine)
       Procedure Draw; virtual;
     End;
 

@@ -25,6 +25,7 @@ Implementation
       Options : Word;
     End;
     Strm: TBufStream;
+    ErrorSave: Pointer;
     I: Byte;
     Cancel: Boolean;
     SearchStr, FoundStr, DelStr, S, F: String[80];
@@ -152,9 +153,12 @@ Implementation
       SearchStr:=GetMsg(sSearchingFor);
       FoundStr:=GetMsg(sFound);
       DelStr:=GetMsg(sDeleting);
+      ErrorSave:=StreamError;
+      StreamError:=nil;
       Strm.Init(PchPath+'PCHOICE.INI', stOpen, 1024);
       Strm.Read(Options, SizeOf(Options));
       Strm.Done;
+      StreamError:=ErrorSave;
       If Strm.Status<>stOk Then
       With Options Do
       Begin

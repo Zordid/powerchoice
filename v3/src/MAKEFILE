@@ -1,0 +1,31 @@
+# MAKE-Datei für Power-Choice 3.0
+ASM=ASM        # Assembler Unterverzeichnis
+REZ=REZFILES   # Resource Unterverzeichnis
+RUN=D:         # EXE-Verzeichnis  
+
+.asm.obj:
+  tasm /m3 $<,$*.obj
+
+pchoice.exe: pch*.pas initovr.pas pchoice.rez
+  tpc /M /U$(REZ) pchoice.pas
+  copy /b $(RUN)\$.+$(RUN)\$&.ovr+pchoice.rez $(RUN)\$.
+  checkpos $(RUN)\$. userlst
+  copy $(RUN)\$. c:\pchoice
+
+pchoice.rez: $(REZ)\pchstr.rez $(REZ)\pchdlgs.rez $(REZ)\pchoice1.rez
+  cd $(REZ)
+  copy pchstr.rez pchoice.rez
+  makerez
+  copy pchoice.rez ..
+  del pchoice.rez
+  cd..
+  tvrm p pchoice
+
+$(ASM)\pchpw.sys: $(ASM)\pchpw.obj
+  tlink /x $*.obj
+  exe2bin $*.exe $<
+  del $*.exe
+
+$(ASM)\pchega.com: $(ASM)\pchega.obj
+  tlink /t /x $*.obj
+

@@ -42,7 +42,7 @@ Begin
   For C:=0 To CRez.Count-1 Do
   Begin
     Obj:=CRez.Get(CRez.KeyAt(C));
-    If Obj<>nil Then
+    If (Obj<>nil) And (TypeOf(Obj^)<>TypeOf(TStringList)) Then
     Begin
       Writeln('  - ', CRez.KeyAt(C));
       Rez.Put(Obj, CRez.KeyAt(C));
@@ -56,9 +56,10 @@ End;
 Begin
   RegisterTypes;
   StreamError:=@StrmError;
-  Writeln('Extending PCHOICE.REZ file...');
+  Writeln('Updating PCHOICE.REZ file...');
   Strm := New(PBufStream, Init('PCHOICE.REZ', stOpen, 1024));
   Rez.Init(Strm);
-  CopyToRez('PCHOICE2.REZ');
+  CopyToRez('PCHOICE1.REZ');
+  CopyToRez('PCHDLGS.REZ');
   Rez.Done;
 End.

@@ -7,10 +7,10 @@ Uses
   Overlay, StrUtl, StrObj, DateUtl, DosTools,
   { Turbo Vision units: }
   Objects, Drivers, Views, Menus, Dialogs, App, MsgBox, StdDlg, Editor,
-  HelpFile, ClkView, Fields, AsciiTab, HistList, HintStat, ColorSel, Calc,
+  HelpFile, Fields, AsciiTab, HistList, HintStat, ColorSel, Calc,
   { Power-Choice units: }
   PchGlb, PchCmds, PchHelp, PchOpt, PchMsg, PchPW, PchRun, PchOvr1,
-  PchDos, PchMenu, PchFunc, PchTools, PchMacro, PchTetris;
+  PchDos, PchMenu, PchFunc, PchTools, PchTetris;
 
 {$O Menus}
 {$O StdDlg}
@@ -30,13 +30,12 @@ Uses
 {$O PchFunc}
 {$O PchOvr1}
 {$O PchTools}
-{$O PchMacro}
 {$O PchTetris}
 
 Type
   PPchoiceApp= ^TPchoiceApp;
   TPchoiceApp= Object(TApplication)
-    Clock: PClockView;
+    {Clock: PClockView;}
     MainMenu: PGroupItem;
     Constructor Init;
     Procedure InitMenuBar; virtual;
@@ -61,7 +60,7 @@ Begin
   With LowLevel^ Do
   Begin
     If Booted Then
-      PrintStr(#10#13'Power-Choice Version 3.0  (c) Copyright 1991 by Olaf Gottschalk'#10#13);
+      PrintStr(#10#13' Power-Choice Version 3.01  (c) Copyright 1990-93 by Olaf Gottschalk'#10#13);
     If WaitForKey Then WaitForEvent;
     Clock:=0;
     ScrSaver:=True;
@@ -71,7 +70,7 @@ Begin
   InitResource;           { Init resource file }
   InitVars;               { Init variables }
   TApplication.Init;      { Init the application }
-  Clock:=Nil;             { Set Clock to Nil }
+  {Clock:=Nil;}             { Set Clock to Nil }
   DisableCommands(EditCommands);
   With LowLevel^ Do
   Begin
@@ -121,9 +120,11 @@ Begin
   TApplication.GetEvent(Event);
   If (Event.What=evCommand) And (Event.Command=cmHelp) Then
   Begin
+    {
     If Not ShowHelp(PchPath+HelpFileName) Then
       MessageBox(GetMsg(sHelpFileNotFound), nil, mfError+mfOkButton);
     ClearEvent(Event);
+    }
   End;
 End;
 
@@ -186,6 +187,7 @@ Var
   E: TEvent;
 Begin
   TApplication.Idle;
+  {
   If Clock=Nil Then
   Begin
     R.Assign(71, 0, 80, 1);
@@ -193,6 +195,7 @@ Begin
     Insert(Clock);
   End;
   Clock^.Update;
+  }
   If ReCalcMem Then
     Message(DeskTop, evBroadcast, cmRedrawMem, nil);
   If TypeOf(DeskTop^.Current^)=TypeOf(TTetris) Then

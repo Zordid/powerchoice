@@ -53,7 +53,7 @@ begin:   jmp install
                                     ; Record
 newint:    iret                     ;   IRET: Byte; 
 id         DB 6,"PCH300"            ;   ID: String[6];
-password   DB 0                     ;   Password,
+password   DB 1                     ;   Password,
 clock      DB 0                     ;   Clock: Byte;
 scrsaver   DB false                 ;   ScrSaver,
 waitforkey DB false                 ;   WaitforKey,

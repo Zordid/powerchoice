@@ -47,7 +47,7 @@ Implementation
     RegisterType(RHintStatusLine);
     { FIELDS }
     RegisterType(RKeyInputLine);
-    RegisterType(RIntInputLine);
+    RegisterType(RNumInputLine);
     RegisterType(RRealInputLine);
     { HELPFILE }
     RegisterType(RHelpTopic);
