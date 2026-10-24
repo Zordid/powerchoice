@@ -1,0 +1,16 @@
+# Keep files exactly as committed: the DOS sources use CRLF line endings.
+* -text
+
+*.PAS linguist-language=Pascal
+*.ASM linguist-language=Assembly
+
+# Turbo Vision resource streams (dialog and string sources)
+*.DLG binary
+*.REZ binary
+*.STR binary
+
+v3/bin/** binary
+v1/disk/** binary
+*.jsdos binary
+*.wasm binary
+*.mp4 binary

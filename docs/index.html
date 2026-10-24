@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power-Choice – play it in your browser</title>
+<meta name="description" content="Power-Choice, a menu system for MS-DOS by Olaf Gottschalk, 1989–1994. Both versions running in your browser.">
+<meta property="og:title" content="Power-Choice – play it in your browser">
+<meta property="og:description" content="A menu system for MS-DOS, 1989–1994: Softwhere Associates, Wyoming, and Bartels Computer Systeme. Both versions running in DOSBox, in your browser.">
+<meta property="og:image" content="https://zordid.github.io/powerchoice/social-preview.png">
+<meta property="og:url" content="https://zordid.github.io/powerchoice/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="play/js-dos/js-dos.css">
+<style>
+  :root { --blue: #0000aa; --cyan: #00aaaa; --gray: #aaaaaa; --white: #ffffff; --yellow: #ffff55; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--blue); color: var(--white);
+    font: 16px/1.5 "IBM Plex Mono", Menlo, Consolas, "Courier New", monospace;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { margin: 0; font-size: 2rem; letter-spacing: .3em; color: var(--yellow); }
+  .sub { margin: 4px 0 24px; color: var(--gray); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--gray); color: #000; padding: 16px 20px; box-shadow: 8px 8px 0 #000; }
+  .card h2 { margin: 0 0 4px; font-size: 1.1rem; }
+  .card p { margin: 0 0 12px; }
+  .card ul { margin: 0 0 16px; padding-left: 20px; font-size: .9rem; }
+  .card a.start {
+    display: inline-block; background: #00aa00; color: var(--white); padding: 4px 18px;
+    text-decoration: none; box-shadow: 4px 4px 0 #000;
+  }
+  .card a.start:hover, .card a.start:focus { background: #55ff55; color: #000; }
+  .card.active { outline: 3px solid var(--yellow); }
+  kbd { background: #000; color: var(--white); padding: 0 4px; font-family: inherit; }
+  #screen { margin-top: 28px; }
+  #dos { width: 100%; aspect-ratio: 5 / 3; background: #000; }
+  .hint { color: var(--gray); font-size: .9rem; }
+  #tv { margin-top: 36px; }
+  #tv h2 { margin: 0 0 8px; font-size: 1.2rem; color: var(--yellow); letter-spacing: .1em; }
+  #tv video { width: 100%; max-width: 720px; display: block; background: #000; }
+  footer { margin-top: 32px; font-size: .85rem; color: var(--gray); }
+  footer a, .sub a { color: var(--cyan); }
+</style>
+</head>
+<body>
+<main>
+  <h1>POWER-CHOICE</h1>
+  <p class="sub">A menu system for MS-DOS by Olaf Gottschalk, 1989–1994.
+    Running here in DOSBox, in your browser.
+    The full story is in the <a href="https://github.com/Zordid/powerchoice">repository</a>.</p>
+
+  <div class="cards">
+    <section class="card" id="card-v1">
+      <h2>Version 1.0e (1990)</h2>
+      <p>Softwhere Associates, Evanston, Wyoming. English, Turbo Pascal 5.5,
+        rebuilt from the original source in 2026.</p>
+      <ul>
+        <li><kbd>↑</kbd><kbd>↓</kbd> choose, <kbd>Enter</kbd> open or run, <kbd>Tab</kbd> back</li>
+        <li><em>Desktop Publishing Group</em> holds the programs of the 1990
+          flyer; Ventura asks for its password, <kbd>VENT</kbd></li>
+        <li><kbd>F1</kbd> Program Info, <kbd>F2</kbd> Edit Mode</li>
+        <li><kbd>Esc</kbd> to DOS, then type <kbd>PCH</kbd> to come back</li>
+        <li>The original installer is on drive <kbd>A:</kbd> (<kbd>PCHINST</kbd>)</li>
+        <li>The 1990 <a href="https://github.com/Zordid/powerchoice/blob/main/docs/1990/users-guide.md">User's Guide</a>
+          explains the rest</li>
+      </ul>
+      <a class="start" href="?v=1#screen">Start 1.0e</a>
+    </section>
+    <section class="card" id="card-v3">
+      <h2>Version 3.1 (1993)</h2>
+      <p>Bartels Computer Systeme. German, Turbo Pascal 6.0 with
+        Turbo Vision, the original 1993 program.</p>
+      <ul>
+        <li>Menus with <kbd>Alt</kbd>+the red letter, or the mouse</li>
+        <li><kbd>F1</kbd> Hilfe, <kbd>F2</kbd> Editmodus, <kbd>F4</kbd> DOS-Shell</li>
+        <li><em>Tools → Tetris</em>: <kbd>←</kbd><kbd>→</kbd> move, <kbd>↑</kbd> rotate, <kbd>↓</kbd> drop</li>
+        <li><kbd>Alt</kbd>+<kbd>X</kbd> ends, <kbd>PCH</kbd> restarts</li>
+        <li>Leave it alone for a minute: the screen saver switches the screen
+          off, any key wakes it</li>
+      </ul>
+      <a class="start" href="?v=3#screen">Start 3.1</a>
+    </section>
+  </div>
+
+  <div id="screen">
+    <div id="dos"></div>
+    <p class="hint" id="hint">Choose a version above, then click into the
+      screen. On a Mac, the function keys may need <kbd>fn</kbd>.
+      The word processors and spreadsheets of the time are not included: the
+      menu entries start small stand-in programs instead, so you can see
+      Power-Choice step aside, its resident clock run on top of another
+      program, and the menu come back. In 3.1 the screen saver starts after
+      one minute instead of the original five. 1.0e starts with the DOS clock
+      set to 18 May 1990, the day of the screenshot on the original flyer.</p>
+  </div>
+
+  <section id="tv">
+    <h2>AS SEEN ON TV… ALMOST</h2>
+    <video controls preload="none" poster="tv-ad/poster.jpg" src="tv-ad/powerchoice-ad.mp4"></video>
+    <p class="hint">Softwhere Associates never ran a TV commercial, so in 2026
+      Power-Choice got one anyway: a homage in the style of 1990, with the
+      slogans of the original flyer. The phone number is fictional.</p>
+  </section>
+
+  <footer>
+    Power-Choice © 1989–1994 Olaf Gottschalk, MIT license.
+    Emulation by <a href="https://js-dos.com">js-dos</a> 8.5.3 (GPL-2.0,
+    <a href="play/js-dos/NOTICE.md">notice and source</a>).
+  </footer>
+</main>
+
+<script src="play/js-dos/js-dos.js"></script>
+<script>
+  const versions = {
+    // 3.1 needs DOSBox-X: only it emulates the VGA blanking that the
+    // screen saver of PCHEGA uses. The ?xxxxxxxx after a bundle is the start
+    // of its SHA-256, so browsers fetch a changed bundle instead of a cached one.
+    1: { bundle: 'play/pch10.jsdos?255e01e1', card: 'card-v1', backend: 'dosbox' },
+    3: { bundle: 'play/pch31.jsdos?9329d114', card: 'card-v3', backend: 'dosboxX' },
+  };
+  const choice = versions[new URLSearchParams(location.search).get('v')];
+  if (choice) {
+    // while DOS has the keyboard, keep arrow keys etc. from scrolling the page
+    const dos = document.getElementById('dos');
+    let inDos = false;
+    document.addEventListener('mousedown', e => { inDos = dos.contains(e.target); });
+    window.addEventListener('keydown', e => {
+      if (inDos && [' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+                    'PageUp', 'PageDown', 'Home', 'End', 'Tab'].includes(e.key)) {
+        e.preventDefault();
+      }
+    });
+    document.getElementById(choice.card).classList.add('active');
+    Dos(document.getElementById('dos'), {
+      url: choice.bundle,
+      pathPrefix: 'play/js-dos/emulators/',
+      backend: choice.backend,
+      autoStart: true,
+      noCloud: true,
+    });
+  }
+</script>
+</body>
+</html>
