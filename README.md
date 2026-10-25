@@ -14,6 +14,8 @@ DOSBox today.
 
 **[▶ Play both versions in your browser](https://zordid.github.io/powerchoice/)**
 
+[![Archived at Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/Zordid/powerchoice/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/Zordid/powerchoice)
+
 ![Power-Choice 3.1 in action: About box, menus, online help and calculator](docs/recordings/tour-3.1.gif)
 
 | | |
@@ -452,6 +454,12 @@ project and is now in `v3/src`. `Calc`, `Gadgets`, `HelpFile` and
 
 ## Notes on this archive
 
+- **Preserved:** this repository is archived at
+  [Software Heritage](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/Zordid/powerchoice).
+  The code as first published in October 2026 has the permanent
+  identifier `swh:1:dir:f8e81dbfd1bc6b4e591ef9da5ab7fb3f724f92bd`; the
+  [release](https://github.com/Zordid/powerchoice/releases/tag/museum-2026)
+  has the 3.1 distribution and the 1.0e install disk as downloads.
 - **Sources:** `PCH3-00.ARJ` … `PCH3-10B.ARJ` and `Pch1-00.zip`, found on
   backup CDs. The file contents are unchanged except that text files
   were converted from code page 437 to UTF-8 (so umlauts and box-drawing
