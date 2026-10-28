@@ -261,6 +261,12 @@ bit amazed. I think I can see my clean code style emerging. What I can't
 see is a single test: unit testing was not something I had learned, and I
 wonder whether it was a thing at all in 90s Pascal.
 
+What I would never in the world do again: put a space before an
+exclamation mark, like this ! The 1.0 sources do it 24 times, and the
+installer even greets you with `Welcome to Power-Choice !!`. Version 3.1
+was almost cured, but the habit came back in my next projects for years.
+How horrible.
+
 My message to the kid at Bob's 386: keep it up. That 386 is by far not it!
 
 ### A code review, 36 years late
