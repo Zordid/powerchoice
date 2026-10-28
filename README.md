@@ -247,8 +247,8 @@ the end of every menu program of the time. We were simply too late to the party.
 
 I studied electrical engineering, but that was a side quest. I stayed a
 programmer, and I still am. During my studies I wrote custom software, some
-of it for BCS and some on my own: warehouse and order management for a
-chain of kiosks, a client database for a lawyer, and once the
+of it for BCS and some on my own: [warehouse and order management for a
+chain of kiosks](https://github.com/Zordid/kiosk), a client database for a lawyer, and once the
 reconstruction of the book list of a library that had burned down. To get
 its insurance money, the library had to recover partial data from
 relational database systems that no longer ran. All of it in Pascal, and
@@ -264,7 +264,8 @@ wonder whether it was a thing at all in 90s Pascal.
 What I would never in the world do again: put a space before an
 exclamation mark, like this ! The 1.0 sources do it 24 times, and the
 installer even greets you with `Welcome to Power-Choice !!`. Version 3.1
-was almost cured, but the habit came back in my next projects for years.
+was almost cured, but the habit came back in
+[my next projects](https://github.com/Zordid/kiosk) for years.
 How horrible.
 
 My message to the kid at Bob's 386: keep it up. That 386 is by far not it!
@@ -474,7 +475,8 @@ project and is now in `v3/src`. `Calc`, `Gadgets`, `HelpFile` and
   with `iconv -f UTF-8 -t CP437`.
 - **Recovered:** `v3/src/FIELDS.PAS` was not in the Power-Choice
   archives. It comes from `KIOSK12C.ARJ` (8 June 1993), a project for a
-  chain of kiosks on the same backups, and is the unit Power-Choice 3.x
+  chain of kiosks on the same backups (now [its own repository](https://github.com/Zordid/kiosk)),
+  and is the unit Power-Choice 3.x
   uses: the stream IDs it registers match `PCHOVR1.PAS`. It is ASCII and
   unchanged.
 - **Not included:** compiled intermediates (`.TPU`, `.OBJ`, `.EXE` built
